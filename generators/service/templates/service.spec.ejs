@@ -1,0 +1,49 @@
+describe('<%= moduleName %>: <%= serviceName %> service', function () {
+  var $injector;
+  var $rootScope;
+  var $q;
+  var $http;
+  var $httpBackend;
+  var <%= serviceName %>;
+
+  beforeEach(function () {
+    common.globalBeforeWithUI();
+    module('<%= moduleName %>');
+
+    inject(function (
+      _$injector_,
+      _$rootScope_,
+      _$q_,
+      _$http_,
+      _$httpBackend_
+    ) {
+      $injector = _$injector_;
+      $rootScope = _$rootScope_;
+      $q = _$q_;
+      $http = _$http_;
+      $httpBackend = _$httpBackend_;
+      <%= serviceName %> = $injector.get('<%= serviceName %>');
+    });
+  });
+
+  describe('testing method1', function () {
+    //var exampleStub;
+
+    beforeEach(function () {
+      //////////// stubbing dependencies
+
+      //exampleStub = spyOn($injector.get('exampleDependency'), 'method2');
+    });
+
+    it('should return "hello, world"', function () {
+      // given
+
+      // when
+      var actual = <%= serviceName %>.method1();
+
+      // then
+      expect(actual)
+        .toEqual('hello, world');
+    });
+  });
+});

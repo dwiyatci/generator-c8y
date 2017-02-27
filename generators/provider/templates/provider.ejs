@@ -1,0 +1,38 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .provider('<%= providerName %>', <%= providerName %>Provider);
+
+  /* @ngInject */
+  function <%= providerName %>Provider() {
+    var provider = this;
+    var configurableProperty;
+
+    _.assign(provider, {
+      setConfigurableProperty: setConfigurableProperty,
+      $get: <%= providerName %>Service
+    });
+
+    ////////////
+
+    function setConfigurableProperty(value) {
+      configurableProperty = value;
+    }
+
+    function <%= providerName %>Service() {
+      var service = {
+        method1: method1
+      };
+
+      return service;
+
+      ////////////
+
+      function method1() {
+        return 'hello, ' + configurableProperty;
+      }
+    }
+  }
+}());

@@ -1,0 +1,22 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .factory('<%= serviceName %>', <%= serviceName %>);
+
+  /* @ngInject */
+  function <%= serviceName %>() {
+    var service = {
+      method1: method1
+    };
+
+    return service;
+
+    ////////////
+
+    function method1() {
+      return 'hello, world';
+    }
+  }
+}());

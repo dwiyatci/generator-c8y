@@ -1,0 +1,38 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .component('<%= prefixedComponentName %>', {
+      template: '<div>{{vm.prop}}</div>',
+      bindings: {
+        prop: '<'
+      },
+      controller: Controller,
+      controllerAs: 'vm'
+    });
+
+  /* @ngInject */
+  function Controller() {
+    var vm = this;
+
+    _.assign(vm, {
+      $onInit: onInit,
+      $onChanges: onChanges
+    });
+
+    ////////////
+
+    function onInit() {
+
+    }
+
+    function onChanges(changes) {
+      if (changes.prop) {
+        var prop = changes.prop.currentValue;
+
+
+      }
+    }
+  }
+}());

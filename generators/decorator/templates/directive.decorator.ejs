@@ -1,0 +1,31 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .decorator('<%= recipeName %>Directive', <%= recipeName %>DirectiveDecorator);
+
+  /* @ngInject */
+  function <%= recipeName %>DirectiveDecorator(
+    $delegate
+  ) {
+    var ddo = $delegate[0];
+
+    ddo.compile = compile;
+    delete ddo.link;
+
+    return $delegate;
+
+    ////////////
+
+    function compile() {
+      return link;
+
+      ////////////
+
+      function link(scope, el, attrs, controller) {
+        ddo.link.apply(this, arguments);
+      }
+    }
+  }
+}());

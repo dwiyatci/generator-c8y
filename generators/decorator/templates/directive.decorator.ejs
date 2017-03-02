@@ -10,6 +10,7 @@
     $delegate
   ) {
     var ddo = $delegate[0];
+    var originalLinkFn = ddo.link;
 
     ddo.compile = compile;
     delete ddo.link;
@@ -24,7 +25,7 @@
       ////////////
 
       function link(scope, el, attrs, controller) {
-        ddo.link.apply(this, arguments);
+        originalLinkFn && originalLinkFn.apply(this, arguments);
       }
     }
   }

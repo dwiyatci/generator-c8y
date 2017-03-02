@@ -46,9 +46,10 @@ module.exports = generator.extend({
       });
   },
 
-  _getDestFilename(recipeName, spec) {
+  _getDestFilename(recipeName) {
     return _(recipeName)
       .chain()
+      .replace(/^c8y/i, '')
       .words()
       .take(2)
       .kebabCase()

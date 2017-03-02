@@ -7,7 +7,7 @@
 [Yeoman](http://yeoman.io/) generator for Cumulocity frontend development.
 
 ### Why?
-As usual, it first started with laziness. Laziness in repeating the same thing over and over again. :stuck_out_tongue_winking_eye: Then with bits of creativity and big interest in automation, comes this hobby project. :speedboat:
+As usual, it all started with laziness. Laziness in repeating the same thing over and over again. :stuck_out_tongue_winking_eye: Then with bits of creativity and big interest in automation, comes this hobby project. :speedboat:
 
 ## Installation
 * Make sure you have Node.js ≥ v6.10.0 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
@@ -45,9 +45,9 @@ $ yo c8y:service
 I and my colleague, Jan Feuerbach, are working on another interesting generator to speed up our process of scaffolding custom widgets and plugins in the PoC team at Cumulocity.
 
 - [ ] c8y:plugin
-- [ ] c8y:plugin --widget
-- [ ] c8y:plugin --chart
-- [ ] c8y:plugin --translations
+- [ ] c8y:plugin widget
+- [ ] c8y:plugin chart
+- [ ] c8y:plugin translations
 
 ## Caveats
 * This generator is still on the experimental stage.

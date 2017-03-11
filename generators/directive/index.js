@@ -45,7 +45,7 @@ module.exports = generator.extend({
       .chain()
       .replace(/^c8y/i, '')
       .words()
-      .take(2)
+      .takeRight(2)
       .kebabCase()
       .concat('.directive.js')
       .join('')
@@ -53,12 +53,13 @@ module.exports = generator.extend({
   },
 
   _getPrefixedDirectiveName(directiveName) {
-    return _(directiveName)
-      .chain()
-      .replace(/^c8y/i, '')
-      .camelCase()
-      .upperFirst()
-      .thru(name => `c8y${name}`)
-      .value();
+    //return _(directiveName)
+    //  .chain()
+    //  .replace(/^c8y/i, '')
+    //  .camelCase()
+    //  .upperFirst()
+    //  .thru(name => `c8y${name}`)
+    //  .value();
+    return directiveName;
   }
 });

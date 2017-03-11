@@ -3,10 +3,10 @@
 
   angular
     .module('<%= moduleName %>')
-    .decorator('<%= recipeName %>', <%= recipeName %>Decorator);
+    .decorator('<%= recipeName %>', serviceDecorator);
 
   /* @ngInject */
-  function <%= recipeName %>Decorator(
+  function serviceDecorator(
     $delegate
   ) {
     var originalMethod1 = $delegate.method1;

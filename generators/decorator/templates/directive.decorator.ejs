@@ -3,11 +3,13 @@
 
   angular
     .module('<%= moduleName %>')
-    .decorator('<%= recipeName %>Directive', <%= recipeName %>DirectiveDecorator);
+    .decorator('<%= recipeName %>Directive', directiveDecorator);
 
   /* @ngInject */
-  function <%= recipeName %>DirectiveDecorator(
-    $delegate
+  function directiveDecorator(
+    $delegate,
+    $compile,
+    $parse
   ) {
     var ddo = $delegate[0];
     var originalLinkFn = ddo.link;

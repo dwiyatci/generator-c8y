@@ -22,8 +22,8 @@ module.exports = generator.extend({
         type: 'list',
         name: 'recipe',
         message: 'What recipe do you want to decorate?',
-        choices: ['service', 'directive'],
-        default: 'service'
+        choices: ['directive', 'service'],
+        default: 'directive'
       },
       {
         type: 'input',

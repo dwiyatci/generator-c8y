@@ -44,7 +44,7 @@ module.exports = generator.extend({
       .chain()
       .replace(/^c8y/i, '')
       .words()
-      .take(2)
+      .takeRight(2)
       .kebabCase()
       .concat('.component.js')
       .join('')
@@ -52,12 +52,13 @@ module.exports = generator.extend({
   },
 
   _getPrefixedComponentName(componentName) {
-    return _(componentName)
-      .chain()
-      .replace(/^c8y/i, '')
-      .camelCase()
-      .upperFirst()
-      .thru(name => `c8y${name}`)
-      .value();
+    //return _(componentName)
+    //  .chain()
+    //  .replace(/^c8y/i, '')
+    //  .camelCase()
+    //  .upperFirst()
+    //  .thru(name => `c8y${name}`)
+    //  .value();
+    return componentName;
   }
 });

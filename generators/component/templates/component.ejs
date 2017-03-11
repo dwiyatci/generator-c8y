@@ -29,8 +29,12 @@
 
     function onChanges(changes) {
       if (changes.prop) {
-        var prop = changes.prop.currentValue;
+        onPropChange();
+      }
+    }
 
+    function onPropChange() {
+      if (vm.prop) {
 
       }
     }

@@ -44,10 +44,10 @@ $ yo c8y:service
 ## TODO
 I and my colleague, Jan Feuerbach, are working on another interesting generator to speed up our process of scaffolding custom widgets and plugins in the PoC team at Cumulocity.
 
-- [ ] c8y:plugin
-- [ ] c8y:plugin widget
+- [x] c8y:plugin
+- [x] c8y:plugin widget
 - [ ] c8y:plugin chart
-- [ ] c8y:plugin translations
+- [x] c8y:plugin translations
 
 ## Caveats
 * This generator is still on the experimental stage.

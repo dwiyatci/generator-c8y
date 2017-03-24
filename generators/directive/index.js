@@ -16,7 +16,7 @@ module.exports = generator.extend({
         type: 'input',
         name: 'moduleName',
         message: 'Your module name',
-        default: 'c8y.exampleModule'
+        default: 'c8y.example'
       },
       {
         type: 'input',
@@ -37,7 +37,8 @@ module.exports = generator.extend({
         moduleName,
         directiveName,
         prefixedDirectiveName: this._getPrefixedDirectiveName(directiveName)
-      });
+      }
+    );
   },
 
   _getDestFilename(directiveName) {
@@ -47,8 +48,7 @@ module.exports = generator.extend({
       .words()
       .takeRight(2)
       .kebabCase()
-      .concat('.directive.js')
-      .join('')
+      .thru(name => `${name}.directive.js`)
       .value();
   },
 

@@ -16,7 +16,7 @@ module.exports = generator.extend({
         type: 'input',
         name: 'moduleName',
         message: 'Your module name',
-        default: 'c8y.exampleModule'
+        default: 'c8y.example'
       }
     ]).then(answers => this.answers = answers);
   },
@@ -27,7 +27,8 @@ module.exports = generator.extend({
     this.fs.copyTpl(
       this.templatePath('module.ejs'),
       this.destinationPath(this._getDestFilename(moduleName)),
-      { moduleName });
+      { moduleName }
+    );
   },
 
   _getDestFilename(moduleName) {
@@ -39,8 +40,7 @@ module.exports = generator.extend({
       .words()
       .take(2)
       .kebabCase()
-      .concat('.module.js')
-      .join('')
+      .thru(name => `${name}.module.js`)
       .value();
   }
 });

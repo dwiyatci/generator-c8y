@@ -16,7 +16,7 @@ module.exports = generator.extend({
         type: 'input',
         name: 'moduleName',
         message: 'Your module name',
-        default: 'c8y.exampleModule'
+        default: 'c8y.example'
       },
       {
         type: 'input',
@@ -36,7 +36,8 @@ module.exports = generator.extend({
       {
         moduleName,
         prefixedComponentName: this._getPrefixedComponentName(componentName)
-      });
+      }
+    );
   },
 
   _getDestFilename(componentName) {
@@ -46,8 +47,7 @@ module.exports = generator.extend({
       .words()
       .takeRight(2)
       .kebabCase()
-      .concat('.component.js')
-      .join('')
+      .thru(name => `${name}.component.js`)
       .value();
   },
 

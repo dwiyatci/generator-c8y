@@ -26,20 +26,20 @@ describe('<%= moduleName %>: <%= serviceName %> service', function () {
     });
   });
 
-  describe('testing method1', function () {
+  describe('testing method', function () {
     //var exampleStub;
 
     beforeEach(function () {
       //////////// stubbing dependencies
 
-      //exampleStub = spyOn($injector.get('exampleDependency'), 'method2');
+      //exampleStub = spyOn($injector.get('exampleDependency'), 'method');
     });
 
     it('should return "hello, world"', function () {
       // given
 
       // when
-      var actual = <%= serviceName %>.method1();
+      var actual = <%= serviceName %>.method();
 
       // then
       expect(actual)

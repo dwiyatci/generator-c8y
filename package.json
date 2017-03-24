@@ -23,5 +23,8 @@
   "dependencies": {
     "lodash": "4.17.4",
     "yeoman-generator": "1.0.0"
+  },
+  "scripts": {
+    "install:clean": "yarn upgrade"
   }
 }

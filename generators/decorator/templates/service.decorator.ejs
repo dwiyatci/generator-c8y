@@ -9,16 +9,18 @@
   function serviceDecorator(
     $delegate
   ) {
-    var originalMethod1 = $delegate.method1;
+    var originalMethod = $delegate.method;
 
-    $delegate.method1 = decoratedMethod1;
+    $delegate.method = decoratedMethod;
 
     return $delegate;
 
     ////////////
 
-    function decoratedMethod1() {
-      return originalMethod1.apply(this, arguments);
+    function decoratedMethod() {
+      var result = originalMethod.apply(this, arguments);
+
+      return result;
     }
   }
 }());

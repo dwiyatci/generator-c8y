@@ -16,7 +16,7 @@ module.exports = generator.extend({
         type: 'input',
         name: 'moduleName',
         message: 'Your module name',
-        default: 'c8y.exampleModule'
+        default: 'c8y.example'
       },
       {
         type: 'input',
@@ -47,8 +47,7 @@ module.exports = generator.extend({
       .words()
       .take(2)
       .kebabCase()
-      .concat(spec ? '.service.spec.js' : '.service.js')
-      .join('')
+      .thru(name => `${name}.service${spec ? '.spec' : ''}.js`)
       .value();
   }
 });

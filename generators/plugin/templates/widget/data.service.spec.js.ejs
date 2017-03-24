@@ -1,0 +1,57 @@
+describe('<%= moduleName %>: <%= widgetDataServiceName %>', function () {
+  var $injector;
+  var $httpBackend;
+  var dataService;
+
+  beforeEach(function () {
+    common.globalBeforeWithUI();
+    module('<%= moduleName %>');
+
+    inject(function (
+      _$injector_,
+      _$httpBackend_
+    ) {
+      $injector = _$injector_;
+      $httpBackend = _$httpBackend_;
+      dataService = $injector.get('<%= widgetDataServiceName %>');
+    });
+  });
+
+  describe('getting widget data', function () {
+    var fakeDataPath = ':::PLUGIN_PATH:::/fake-data.json';
+    var fakeDataService;
+    var dataPromiseStub;
+
+    beforeEach(function () {
+      fakeDataService = $injector.get('<%= widgetFakeDataServiceName %>');
+
+      $httpBackend
+        .when('GET', fakeDataPath)
+        .respond(readJSON('plugins/' + fakeDataPath));
+
+      //////////// stubbing dependencies
+
+      //dataPromiseStub = spyOn($injector.get('c8yMeasurements'), 'list');
+    });
+
+    it('should return correct data', function () {
+      // given
+      var deviceId = 42;
+
+      // when
+      //dataPromiseStub
+      //  .and.returnValue(fakeDataService.getDataForDeviceId(deviceId));
+
+      dataService.getDataForDeviceId(deviceId)
+        .then(function (data) {
+          var expectedData = [];
+
+          // then
+          expect(data)
+            .toEqual(expectedData);
+        });
+
+      $httpBackend.flush();
+    });
+  });
+});

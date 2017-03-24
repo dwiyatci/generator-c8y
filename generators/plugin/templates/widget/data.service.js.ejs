@@ -1,0 +1,30 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .factory('<%= widgetDataServiceName %>', dataService);
+
+  /* @ngInject */
+  function dataService(
+    <%= widgetConstantsName %>,
+    <%= widgetFakeDataServiceName %>
+  ) {
+    var service = {
+      getDataForDeviceId: getDataForDeviceId
+    };
+
+    return service;
+
+    ////////////
+
+    function getDataForDeviceId(id) {
+      var dataPromise = <%= widgetFakeDataServiceName %>.getDataForDeviceId(id);
+
+      return dataPromise
+        .then(function (data) {
+          return _.transform(data);
+        });
+    }
+  }
+}());

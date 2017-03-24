@@ -1,0 +1,35 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .component('<%= widgetConfigComponentName %>', {
+      templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
+      bindings: {
+        config: '<'
+      },
+      controller: Controller,
+      controllerAs: 'vm'
+    });
+
+  /* @ngInject */
+  function Controller($scope) {
+    var vm = this;
+
+    vm.$onInit = onInit;
+
+    $scope.$watch('vm.config.device', onDeviceChange, true);
+
+    ////////////
+
+    function onInit() {
+
+    }
+
+    function onDeviceChange(device) {
+      if (device) {
+        console.log(device.id);
+      }
+    }
+  }
+}());

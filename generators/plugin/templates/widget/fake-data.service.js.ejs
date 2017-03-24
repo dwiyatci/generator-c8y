@@ -1,0 +1,26 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .factory('<%= widgetFakeDataServiceName %>', fakeDataService);
+
+  /* @ngInject */
+  function fakeDataService(
+    $http,
+    c8yBase
+  ) {
+    var service = {
+      getDataForDeviceId: getDataForDeviceId
+    };
+
+    return service;
+
+    ////////////
+
+    function getDataForDeviceId(id) {
+      return $http.get(':::PLUGIN_PATH:::/fake-data.json')
+        .then(c8yBase.getResData);
+    }
+  }
+}());

@@ -1,0 +1,21 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .config(configure);
+
+  /* @ngInject */
+  function configure(
+    c8yComponentsProvider,
+    gettext
+  ) {
+    c8yComponentsProvider.add({
+      name: '<%= camelCasedWidgetName %>',
+      nameDisplay: gettext('<%= capitalizedWidgetName %>'),
+      description: gettext('<%= widgetDesc %>'),
+      templateUrl: ':::PLUGIN_PATH:::/main.html',
+      configTemplateUrl: ':::PLUGIN_PATH:::/config.html'
+    });
+  }
+}());

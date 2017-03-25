@@ -55,6 +55,29 @@ module.exports = generator.extend({
       },
 
       chart() {
+        return this.prompt(
+          [
+            {
+              type: 'input',
+              name: 'widgetName',
+              message: 'Your widget name',
+              default: 'home temperature'
+            },
+            {
+              type: 'input',
+              name: 'widgetDesc',
+              message: 'Your chart description',
+              default: 'Vertical bar chart that displays temperature measurement of a room'
+            }
+          ])
+          .then(answers => this.prompt({
+              type: 'input',
+              name: 'moduleName',
+              message: 'Your module name',
+              default: createProbableModuleName(answers.widgetName)
+            }).then(({ moduleName }) => _.assign(answers, { moduleName }))
+          )
+          .then(answers => this.answers = answers);
       },
 
       translations() {
@@ -80,39 +103,27 @@ module.exports = generator.extend({
       },
 
       widget() {
-        const {
-          widgetName,
-          widgetDesc,
-          moduleName
-        } = this.answers;
-
-        const context = {
-          widgetDesc,
-          moduleName,
-          pluginName: createPluginName(widgetName),
-          camelCasedWidgetName: createCamelCasedWidgetName(widgetName),
-          capitalizedWidgetName: createCapitalizedWidgetName(widgetName),
-          widgetConstantsName: createWidgetConstantsName(widgetName),
-          widgetFakeDataServiceName: createWidgetFakeDataServiceName(widgetName),
-          widgetDataServiceName: createWidgetDataServiceName(widgetName),
-          widgetComponentName: createWidgetComponentName(widgetName),
-          widgetConfigComponentName: createWidgetConfigComponentName(widgetName),
-          widgetHtmlTagName: createWidgetHtmlTagName(widgetName),
-          widgetConfigHtmlTagName: createWidgetConfigHtmlTagName(widgetName),
-          widgetCssClassName: createWidgetCssClassName(widgetName),
-          widgetConfigCssClassName: createWidgetConfigCssClassName(widgetName),
-        };
-
-        _.forEach(readdirSync(this.templatePath('widget')), templateFilename =>
-          this.fs.copyTpl(
-            this.templatePath(`widget/${templateFilename}`),
-            this.destinationPath(createDestFileName({ widgetName, templateFilename })),
-            context
-          )
-        );
+        writeWidgetFiles.call(this, {
+          answers: this.answers,
+          templateFilenames: readdirSync(this.templatePath('widget'))
+        });
       },
 
       chart() {
+        const answers = this.answers;
+
+        writeWidgetFiles.call(this, {
+          answers,
+          templateFilenames: _.reject(
+            readdirSync(this.templatePath('widget')), _.curry(_.includes)(_, 'component')),
+          parentDir: 'widget'
+        });
+
+        writeWidgetFiles.call(this, {
+          answers,
+          templateFilenames: readdirSync(this.templatePath('chart')),
+          parentDir: 'chart'
+        });
       },
 
       translations() {
@@ -124,6 +135,41 @@ module.exports = generator.extend({
 });
 
 ////////////
+
+function writeWidgetFiles({ answers, templateFilenames, parentDir }) {
+  const context = createWidgetContext(answers);
+
+  _.forEach(templateFilenames, templateFilename =>
+    this.fs.copyTpl(
+      this.templatePath(`${parentDir}/${templateFilename}`),
+      this.destinationPath(createDestFileName({
+        widgetName: answers.widgetName,
+        templateFilename
+      })),
+      context
+    )
+  );
+}
+
+function createWidgetContext({ widgetName, widgetDesc, moduleName }) {
+  return {
+    widgetDesc,
+    moduleName,
+    pluginName: createPluginName(widgetName),
+    camelCasedWidgetName: createCamelCasedWidgetName(widgetName),
+    capitalizedWidgetName: createCapitalizedWidgetName(widgetName),
+    widgetConstantsName: createWidgetConstantsName(widgetName),
+    widgetFakeDataServiceName: createWidgetFakeDataServiceName(widgetName),
+    widgetDataServiceName: createWidgetDataServiceName(widgetName),
+    widgetComponentName: createWidgetComponentName(widgetName),
+    widgetConfigComponentName: createWidgetConfigComponentName(widgetName),
+    widgetHtmlTagName: createWidgetHtmlTagName(widgetName),
+    widgetConfigHtmlTagName: createWidgetConfigHtmlTagName(widgetName),
+    widgetCssClassName: createWidgetCssClassName(widgetName),
+    widgetConfigCssClassName: createWidgetConfigCssClassName(widgetName),
+    widgetChartFactoryName: createWidgetChartFactoryName(widgetName),
+  };
+}
 
 function createDestFileName({ widgetName, templateFilename }) {
   return `${createPluginDirName(widgetName)}/${templateFilename.replace('.ejs', '')}`;
@@ -163,6 +209,10 @@ function createWidgetComponentName(widgetName) {
 
 function createWidgetConfigComponentName(widgetName) {
   return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}WidgetConfig`;
+}
+
+function createWidgetChartFactoryName(widgetName) {
+  return `${createCamelCasedWidgetName(widgetName)}ChartFactory`;
 }
 
 function createCamelCasedWidgetName(widgetName) {

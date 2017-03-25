@@ -1,0 +1,75 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .directive('<%= widgetComponentName %>', chartWidget);
+
+  /* @ngInject */
+  function chartWidget(<%= widgetChartFactoryName %>) {
+    var ddo = {
+      restrict: 'E',
+      templateUrl: ':::PLUGIN_PATH:::/widget.html',
+      scope: {
+        device: '&'
+      },
+      controller: Controller,
+      controllerAs: 'vm',
+      link: linkFunc
+    };
+
+    return ddo;
+
+    ////////////
+
+    function linkFunc(scope, el) {
+      var chart = <%= widgetChartFactoryName %>.create({
+        container: el.find('.chart-container')
+      });
+
+      scope.$watch('vm.dataset', onDatasetChange, true);
+      scope.$on('dashboardResize', onDashboardResize);
+
+      ////////////
+
+      function onDatasetChange(dataset) {
+        if (dataset) {
+          chart.clear();
+          chart.drawDataset(_.cloneDeep(dataset));
+        }
+      }
+
+      function onDashboardResize() {
+        chart.redraw();
+      }
+    }
+  }
+
+  /* @ngInject */
+  function Controller(
+    $scope,
+    <%= widgetDataServiceName %>
+  ) {
+    var vm = this;
+
+    activate();
+
+    $scope.$watch('device()', onDeviceChange);
+
+    ////////////
+
+    function activate() {
+
+    }
+
+    function onDeviceChange(device) {
+      vm.device = device;
+
+      if (device) {
+        <%= widgetDataServiceName %>
+          .getDataForDeviceId(device.id)
+          .then(_.curry(_.set)(vm, 'dataset', _));
+      }
+    }
+  }
+}());

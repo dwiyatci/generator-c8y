@@ -1,0 +1,48 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .directive('<%= widgetConfigComponentName %>', chartWidgetConfig);
+
+  /* @ngInject */
+  function chartWidgetConfig() {
+    var ddo = {
+      restrict: 'E',
+      templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
+      scope: {
+        config: '&'
+      },
+      controller: Controller,
+      controllerAs: 'vm'
+    };
+
+    return ddo;
+  }
+
+  /* @ngInject */
+  function Controller($scope) {
+    var vm = this;
+
+    activate();
+
+    $scope.$watch('config()', onConfigChange);
+    $scope.$watch('config().device', onDeviceChange);
+
+    ////////////
+
+    function activate() {
+
+    }
+
+    function onConfigChange(config) {
+      vm.config = config;
+    }
+
+    function onDeviceChange(device) {
+      if (device) {
+
+      }
+    }
+  }
+}());

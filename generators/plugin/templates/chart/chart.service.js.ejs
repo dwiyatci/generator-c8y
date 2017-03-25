@@ -1,0 +1,171 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .factory('<%= widgetChartFactoryName %>', chartFactory);
+
+  /* @ngInject */
+  function chartFactory(
+    <%= widgetConstantsName %>,
+    gettext
+  ) {
+    var service = {
+      create: create
+    };
+
+    return service;
+
+    ////////////
+
+    function create(options) {
+      var container = options.container || {};
+      var dataset;
+      var margin;
+      var w;
+      var h;
+      var chart;
+      var xScale;
+      var yScale;
+      var bandwidth;
+      var colorScale;
+      var lLayout;
+      var formatAsPercentage;
+
+      var api = {
+        redraw: redraw,
+        clear: clear,
+        drawDataset: drawDataset
+      };
+
+      return api;
+
+      ////////////
+
+      function redraw() {
+        clear();
+        drawDataset(dataset);
+      }
+
+      function clear() {
+        if (container.jquery) {
+          container
+            .children()
+            .remove();
+        }
+      }
+
+      function drawDataset(ds) {
+        dataset = ds || [];
+
+        setupVariables();
+        setupChartSvg();
+
+        drawXAxis();
+        drawYAxis();
+
+        drawShapes();
+        drawLegend();
+      }
+
+      function setupVariables() {
+        margin = { top: 40, right: 20, bottom: 30, left: 40 };
+        w = container.width() - margin.left - margin.right;
+        h = container.height() - margin.top - margin.bottom;
+
+        xScale = createXScale();
+        yScale = createYScale();
+        bandwidth = xScale.rangeBand();
+
+        colorScale = createColorScale();
+        lLayout = createLLayout();
+        formatAsPercentage = d3.format('%');
+      }
+
+      function createXScale() {
+        return d3
+          .scale
+          .ordinal()
+          .domain(_.range(0, 5))
+          .rangeBands([0, w], 0.2);
+      }
+
+      function createYScale() {
+        return d3
+          .scale
+          .linear()
+          .domain(d3.extent(dataset))
+          .rangeRound([h, 0]);
+      }
+
+      function createColorScale() {
+        return d3
+          .scale
+          .ordinal()
+          //.domain(_.range(10))
+          .range(_.values(<%= widgetConstantsName %>.COLORS));
+      }
+
+      function createLLayout() {
+        return d3
+          .layout
+          .pie();
+      }
+
+      function setupChartSvg() {
+        chart = d3
+          .select(container[0])
+          .append('svg')
+          .attr('width', w + margin.left + margin.right)
+          .attr('height', h + margin.top + margin.bottom)
+          .append('g')
+          .attr('class', 'chart')
+          .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+      }
+
+      function drawXAxis() {
+        chart
+          .append('g')
+          .attr('class', 'axis')
+          .attr('transform', 'translate(0, ' + h + ')')
+          .call(createXAxis());
+      }
+
+      function createXAxis() {
+        return d3
+          .svg
+          .axis()
+          .scale(xScale)
+          .orient('bottom');
+      }
+
+      function drawYAxis() {
+        chart
+          .append('g')
+          .attr('class', 'axis')
+          .call(createYAxis());
+      }
+
+      function createYAxis() {
+        return d3
+          .svg
+          .axis()
+          .scale(yScale)
+          .orient('left');
+        //.tickFormat(formatAsPercentage);
+      }
+
+      function drawShapes() {
+
+      }
+
+      /**
+       * I am even lazy to go to the kitchen sometimes, so please help yourself.
+       * @see https://github.com/susielu/d3-legend
+       */
+      function drawLegend() {
+
+      }
+    }
+  }
+}());

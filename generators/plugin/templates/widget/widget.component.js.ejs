@@ -38,8 +38,8 @@
 
       if (device) {
         <%= widgetDataServiceName %>.getDataForDeviceId(device.id)
-            .then(_.curry(_.set)(vm, 'data', _))
-            .then(onDataChange);
+          .then(_.curry(_.set)(vm, 'data', _))
+          .then(onDataChange);
       }
     }
 

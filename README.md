@@ -46,7 +46,7 @@ I and my colleague, Jan Feuerbach, are working on another interesting generator 
 
 - [x] c8y:plugin
 - [x] c8y:plugin widget
-- [ ] c8y:plugin chart
+- [x] c8y:plugin chart
 - [x] c8y:plugin translations
 
 ## Caveats

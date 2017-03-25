@@ -26,21 +26,21 @@ module.exports = generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('module.ejs'),
-      this.destinationPath(this._getDestFilename(moduleName)),
+      this.destinationPath(createDestFilename(moduleName)),
       { moduleName }
     );
-  },
-
-  _getDestFilename(moduleName) {
-    return _(moduleName)
-      .chain()
-      .replace(/module$/i, '')
-      .split('.')
-      .last()
-      .words()
-      .take(2)
-      .kebabCase()
-      .thru(name => `${name}.module.js`)
-      .value();
   }
 });
+
+function createDestFilename(moduleName) {
+  return _(moduleName)
+    .chain()
+    .replace(/module$/i, '')
+    .split('.')
+    .last()
+    .words()
+    .take(2)
+    .kebabCase()
+    .thru(name => `${name}.module.js`)
+    .value();
+}

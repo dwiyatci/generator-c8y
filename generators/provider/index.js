@@ -11,20 +11,22 @@ module.exports = generator.extend({
   },
 
   prompting() {
-    return this.prompt([
-      {
-        type: 'input',
-        name: 'moduleName',
-        message: 'Your module name',
-        default: 'c8y.example'
-      },
-      {
-        type: 'input',
-        name: 'providerName',
-        message: 'Your provider name',
-        default: 'example'
-      }
-    ]).then(answers => this.answers = answers);
+    return this.prompt(
+      [
+        {
+          type: 'input',
+          name: 'moduleName',
+          message: 'Your module name',
+          default: 'c8y.example'
+        },
+        {
+          type: 'input',
+          name: 'providerName',
+          message: 'Your provider name',
+          default: 'example'
+        }
+      ])
+      .then(answers => this.answers = answers);
   },
 
   writing() {
@@ -32,22 +34,22 @@ module.exports = generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('provider.ejs'),
-      this.destinationPath(this._getDestFilename(providerName)),
+      this.destinationPath(createDestFilename(providerName)),
       {
         moduleName,
         providerName
       }
     );
-  },
-
-  _getDestFilename(providerName) {
-    return _(providerName)
-      .chain()
-      .replace(/provider$/i, '')
-      .words()
-      .take(2)
-      .kebabCase()
-      .thru(name => `${name}.provider.js`)
-      .value();
   }
 });
+
+function createDestFilename(providerName) {
+  return _(providerName)
+    .chain()
+    .replace(/provider$/i, '')
+    .words()
+    .take(2)
+    .kebabCase()
+    .thru(name => `${name}.provider.js`)
+    .value();
+}

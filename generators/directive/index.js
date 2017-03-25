@@ -11,20 +11,22 @@ module.exports = generator.extend({
   },
 
   prompting() {
-    return this.prompt([
-      {
-        type: 'input',
-        name: 'moduleName',
-        message: 'Your module name',
-        default: 'c8y.example'
-      },
-      {
-        type: 'input',
-        name: 'directiveName',
-        message: 'Your directive name',
-        default: 'c8yExample'
-      }
-    ]).then(answers => this.answers = answers);
+    return this.prompt(
+      [
+        {
+          type: 'input',
+          name: 'moduleName',
+          message: 'Your module name',
+          default: 'c8y.example'
+        },
+        {
+          type: 'input',
+          name: 'directiveName',
+          message: 'Your directive name',
+          default: 'c8yExample'
+        }
+      ])
+      .then(answers => this.answers = answers);
   },
 
   writing() {
@@ -32,34 +34,34 @@ module.exports = generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('directive.ejs'),
-      this.destinationPath(this._getDestFilename(directiveName)),
+      this.destinationPath(createDestFilename(directiveName)),
       {
         moduleName,
         directiveName,
-        prefixedDirectiveName: this._getPrefixedDirectiveName(directiveName)
+        prefixedDirectiveName: createPrefixedDirectiveName(directiveName)
       }
     );
-  },
-
-  _getDestFilename(directiveName) {
-    return _(directiveName)
-      .chain()
-      .replace(/^c8y/i, '')
-      .words()
-      .takeRight(2)
-      .kebabCase()
-      .thru(name => `${name}.directive.js`)
-      .value();
-  },
-
-  _getPrefixedDirectiveName(directiveName) {
-    //return _(directiveName)
-    //  .chain()
-    //  .replace(/^c8y/i, '')
-    //  .camelCase()
-    //  .upperFirst()
-    //  .thru(name => `c8y${name}`)
-    //  .value();
-    return directiveName;
   }
 });
+
+function createDestFilename(directiveName) {
+  return _(directiveName)
+    .chain()
+    .replace(/^c8y/i, '')
+    .words()
+    .takeRight(2)
+    .kebabCase()
+    .thru(name => `${name}.directive.js`)
+    .value();
+}
+
+function createPrefixedDirectiveName(directiveName) {
+  //return _(directiveName)
+  //  .chain()
+  //  .replace(/^c8y/i, '')
+  //  .camelCase()
+  //  .upperFirst()
+  //  .thru(name => `c8y${name}`)
+  //  .value();
+  return directiveName;
+}

@@ -13,7 +13,7 @@
     c8yComponentsProvider.add({
       name: '<%= camelCasedWidgetName %>',
       nameDisplay: gettext('<%= capitalizedWidgetName %>'),
-      description: gettext('<%= widgetDesc %>'),
+      description: gettext('<%- widgetDesc %>'),
       templateUrl: ':::PLUGIN_PATH:::/main.html',
       configTemplateUrl: ':::PLUGIN_PATH:::/config.html'
     });

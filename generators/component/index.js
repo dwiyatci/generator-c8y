@@ -11,20 +11,22 @@ module.exports = generator.extend({
   },
 
   prompting() {
-    return this.prompt([
-      {
-        type: 'input',
-        name: 'moduleName',
-        message: 'Your module name',
-        default: 'c8y.example'
-      },
-      {
-        type: 'input',
-        name: 'componentName',
-        message: 'Your component name',
-        default: 'c8yExample'
-      }
-    ]).then(answers => this.answers = answers);
+    return this.prompt(
+      [
+        {
+          type: 'input',
+          name: 'moduleName',
+          message: 'Your module name',
+          default: 'c8y.example'
+        },
+        {
+          type: 'input',
+          name: 'componentName',
+          message: 'Your component name',
+          default: 'c8yExample'
+        }
+      ])
+      .then(answers => this.answers = answers);
   },
 
   writing() {
@@ -32,33 +34,33 @@ module.exports = generator.extend({
 
     this.fs.copyTpl(
       this.templatePath('component.ejs'),
-      this.destinationPath(this._getDestFilename(componentName)),
+      this.destinationPath(createDestFilename(componentName)),
       {
         moduleName,
-        prefixedComponentName: this._getPrefixedComponentName(componentName)
+        prefixedComponentName: createPrefixedComponentName(componentName)
       }
     );
-  },
-
-  _getDestFilename(componentName) {
-    return _(componentName)
-      .chain()
-      .replace(/^c8y/i, '')
-      .words()
-      .takeRight(2)
-      .kebabCase()
-      .thru(name => `${name}.component.js`)
-      .value();
-  },
-
-  _getPrefixedComponentName(componentName) {
-    //return _(componentName)
-    //  .chain()
-    //  .replace(/^c8y/i, '')
-    //  .camelCase()
-    //  .upperFirst()
-    //  .thru(name => `c8y${name}`)
-    //  .value();
-    return componentName;
   }
 });
+
+function createDestFilename(componentName) {
+  return _(componentName)
+    .chain()
+    .replace(/^c8y/i, '')
+    .words()
+    .takeRight(2)
+    .kebabCase()
+    .thru(name => `${name}.component.js`)
+    .value();
+}
+
+function createPrefixedComponentName(componentName) {
+  //return _(componentName)
+  //  .chain()
+  //  .replace(/^c8y/i, '')
+  //  .camelCase()
+  //  .upperFirst()
+  //  .thru(name => `c8y${name}`)
+  //  .value();
+  return componentName;
+}

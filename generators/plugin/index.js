@@ -41,14 +41,14 @@ module.exports = generator.extend({
               type: 'input',
               name: 'widgetDesc',
               message: 'Your widget description',
-              default: 'Displays \"hello, world\" to the user'
+              default: 'Displays „hello, world“ to the user'
             }
           ])
           .then(answers => this.prompt({
               type: 'input',
               name: 'moduleName',
               message: 'Your module name',
-              default: getProbableModuleNameFor(answers.widgetName)
+              default: createProbableModuleName(answers.widgetName)
             }).then(({ moduleName }) => _.assign(answers, { moduleName }))
           )
           .then(answers => this.answers = answers);
@@ -89,24 +89,24 @@ module.exports = generator.extend({
         const context = {
           widgetDesc,
           moduleName,
-          pluginName: getPluginNameFor(widgetName),
-          camelCasedWidgetName: getCamelCasedWidgetNameFor(widgetName),
-          capitalizedWidgetName: getCapitalizedWidgetNameFor(widgetName),
-          widgetConstantsName: getWidgetConstantsNameFor(widgetName),
-          widgetFakeDataServiceName: getWidgetFakeDataServiceNameFor(widgetName),
-          widgetDataServiceName: getWidgetDataServiceNameFor(widgetName),
-          widgetComponentName: getWidgetComponentNameFor(widgetName),
-          widgetConfigComponentName: getWidgetConfigComponentNameFor(widgetName),
-          widgetHtmlTagName: getWidgetHtmlTagNameFor(widgetName),
-          widgetConfigHtmlTagName: getWidgetConfigHtmlTagNameFor(widgetName),
-          widgetCssClassName: getWidgetCssClassNameFor(widgetName),
-          widgetConfigCssClassName: getWidgetConfigCssClassNameFor(widgetName),
+          pluginName: createPluginName(widgetName),
+          camelCasedWidgetName: createCamelCasedWidgetName(widgetName),
+          capitalizedWidgetName: createCapitalizedWidgetName(widgetName),
+          widgetConstantsName: createWidgetConstantsName(widgetName),
+          widgetFakeDataServiceName: createWidgetFakeDataServiceName(widgetName),
+          widgetDataServiceName: createWidgetDataServiceName(widgetName),
+          widgetComponentName: createWidgetComponentName(widgetName),
+          widgetConfigComponentName: createWidgetConfigComponentName(widgetName),
+          widgetHtmlTagName: createWidgetHtmlTagName(widgetName),
+          widgetConfigHtmlTagName: createWidgetConfigHtmlTagName(widgetName),
+          widgetCssClassName: createWidgetCssClassName(widgetName),
+          widgetConfigCssClassName: createWidgetConfigCssClassName(widgetName),
         };
 
         _.forEach(readdirSync(this.templatePath('widget')), templateFilename =>
           this.fs.copyTpl(
             this.templatePath(`widget/${templateFilename}`),
-            this.destinationPath(getDestFileNameFor({ widgetName, templateFilename })),
+            this.destinationPath(createDestFileName({ widgetName, templateFilename })),
             context
           )
         );
@@ -125,71 +125,71 @@ module.exports = generator.extend({
 
 ////////////
 
-function getDestFileNameFor({ widgetName, templateFilename }) {
-  return `${getPluginDirNameFor(widgetName)}/${templateFilename.replace('.ejs', '')}`;
+function createDestFileName({ widgetName, templateFilename }) {
+  return `${createPluginDirName(widgetName)}/${templateFilename.replace('.ejs', '')}`;
 }
 
-function getPluginDirNameFor(widgetName) {
-  return _.kebabCase(getPluginNameFor(widgetName));
+function createPluginDirName(widgetName) {
+  return _.kebabCase(createPluginName(widgetName));
 }
 
-function getPluginNameFor(widgetName) {
-  return `${getCapitalizedWidgetNameFor(widgetName)} widget`;
+function createPluginName(widgetName) {
+  return `${createCapitalizedWidgetName(widgetName)} widget`;
 }
 
-function getCapitalizedWidgetNameFor(widgetName) {
-  return _.capitalize(getTruncatedWidgetNameFor(widgetName).join(' '));
+function createCapitalizedWidgetName(widgetName) {
+  return _.capitalize(createTruncatedWidgetName(widgetName).join(' '));
 }
 
-function getProbableModuleNameFor(widgetName) {
-  return `c8y.pocs.${getCamelCasedWidgetNameFor(widgetName)}Widget`;
+function createProbableModuleName(widgetName) {
+  return `c8y.pocs.${createCamelCasedWidgetName(widgetName)}Widget`;
 }
 
-function getWidgetConstantsNameFor(widgetName) {
-  return `${getCamelCasedWidgetNameFor(widgetName)}Constants`;
+function createWidgetConstantsName(widgetName) {
+  return `${createCamelCasedWidgetName(widgetName)}Constants`;
 }
 
-function getWidgetFakeDataServiceNameFor(widgetName) {
-  return `fake${_.upperFirst(getCamelCasedWidgetNameFor(widgetName))}DataService`;
+function createWidgetFakeDataServiceName(widgetName) {
+  return `fake${_.upperFirst(createCamelCasedWidgetName(widgetName))}DataService`;
 }
 
-function getWidgetDataServiceNameFor(widgetName) {
-  return `${getCamelCasedWidgetNameFor(widgetName)}DataService`;
+function createWidgetDataServiceName(widgetName) {
+  return `${createCamelCasedWidgetName(widgetName)}DataService`;
 }
 
-function getWidgetComponentNameFor(widgetName) {
-  return `c8y${_.upperFirst(getCamelCasedWidgetNameFor(widgetName))}Widget`;
+function createWidgetComponentName(widgetName) {
+  return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}Widget`;
 }
 
-function getWidgetConfigComponentNameFor(widgetName) {
-  return `c8y${_.upperFirst(getCamelCasedWidgetNameFor(widgetName))}WidgetConfig`;
+function createWidgetConfigComponentName(widgetName) {
+  return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}WidgetConfig`;
 }
 
-function getCamelCasedWidgetNameFor(widgetName) {
-  return _.camelCase(getTruncatedWidgetNameFor(widgetName));
+function createCamelCasedWidgetName(widgetName) {
+  return _.camelCase(createTruncatedWidgetName(widgetName));
 }
 
-function getWidgetHtmlTagNameFor(widgetName) {
-  return `c8y-${getKebabCasedWidgetNameFor(widgetName)}-widget`;
+function createWidgetHtmlTagName(widgetName) {
+  return `c8y-${createKebabCasedWidgetName(widgetName)}-widget`;
 }
 
-function getWidgetConfigHtmlTagNameFor(widgetName) {
-  return `c8y-${getKebabCasedWidgetNameFor(widgetName)}-widget-config`;
+function createWidgetConfigHtmlTagName(widgetName) {
+  return `c8y-${createKebabCasedWidgetName(widgetName)}-widget-config`;
 }
 
-function getWidgetCssClassNameFor(widgetName) {
-  return `widget-${getKebabCasedWidgetNameFor(widgetName)}`;
+function createWidgetCssClassName(widgetName) {
+  return `widget-${createKebabCasedWidgetName(widgetName)}`;
 }
 
-function getWidgetConfigCssClassNameFor(widgetName) {
-  return `widget-config-${getKebabCasedWidgetNameFor(widgetName)}`;
+function createWidgetConfigCssClassName(widgetName) {
+  return `widget-config-${createKebabCasedWidgetName(widgetName)}`;
 }
 
-function getKebabCasedWidgetNameFor(widgetName) {
-  return _.kebabCase(getTruncatedWidgetNameFor(widgetName));
+function createKebabCasedWidgetName(widgetName) {
+  return _.kebabCase(createTruncatedWidgetName(widgetName));
 }
 
-function getTruncatedWidgetNameFor(widgetName) {
+function createTruncatedWidgetName(widgetName) {
   return _(widgetName)
     .chain()
     .words()

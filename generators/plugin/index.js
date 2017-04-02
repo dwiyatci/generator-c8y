@@ -105,7 +105,8 @@ module.exports = generator.extend({
       widget() {
         writeWidgetFiles.call(this, {
           answers: this.answers,
-          templateFilenames: readdirSync(this.templatePath('widget'))
+          templateFilenames: readdirSync(this.templatePath('widget')),
+          parentDir: 'widget'
         });
       },
 
@@ -196,11 +197,11 @@ function createWidgetConstantsName(widgetName) {
 }
 
 function createWidgetFakeDataServiceName(widgetName) {
-  return `fake${_.upperFirst(createCamelCasedWidgetName(widgetName))}DataService`;
+  return `fake${_.upperFirst(createCamelCasedWidgetName(widgetName))}Service`;
 }
 
 function createWidgetDataServiceName(widgetName) {
-  return `${createCamelCasedWidgetName(widgetName)}DataService`;
+  return `${createCamelCasedWidgetName(widgetName)}Service`;
 }
 
 function createWidgetComponentName(widgetName) {

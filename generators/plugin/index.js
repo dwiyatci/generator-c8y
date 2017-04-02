@@ -25,6 +25,31 @@ module.exports = generator.extend({
 
   _getPromptingActions() {
     return {
+      manifest() {
+        return this.prompt(
+          [
+            {
+              type: 'input',
+              name: 'pluginName',
+              message: 'Your plugin name',
+              default: 'Hello world'
+            },
+            {
+              type: 'input',
+              name: 'pluginDesc',
+              message: 'Your plugin description',
+              default: 'A simple hello world plugin'
+            },
+            {
+              type: 'input',
+              name: 'pluginCategory',
+              message: 'Your plugin category',
+              default: 'PoC'
+            }
+          ])
+          .then(answers => this.answers = answers);
+      },
+
       hello() {
       },
 
@@ -97,6 +122,14 @@ module.exports = generator.extend({
 
   _getWritingActions() {
     return {
+      manifest() {
+        this.fs.copyTpl(
+          this.templatePath('cumulocity.json.ejs'),
+          this.destinationPath('cumulocity.json'),
+          this.answers
+        );
+      },
+
       hello() {
         this.fs.copy(
           this.templatePath('hello'), this.destinationPath('hello'));

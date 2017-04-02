@@ -40,7 +40,7 @@ module.exports = generator.extend({
     const { moduleName, recipe, recipeName } = this.answers;
 
     this.fs.copyTpl(
-      this.templatePath(`${recipe}.decorator.ejs`),
+      this.templatePath(`${recipe}.decorator.js.ejs`),
       this.destinationPath(createDestFilename(recipeName)),
       {
         moduleName,

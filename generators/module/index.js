@@ -25,7 +25,7 @@ module.exports = generator.extend({
     const { moduleName } = this.answers;
 
     this.fs.copyTpl(
-      this.templatePath('module.ejs'),
+      this.templatePath('module.js.ejs'),
       this.destinationPath(createDestFilename(moduleName)),
       { moduleName }
     );

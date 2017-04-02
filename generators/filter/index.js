@@ -32,7 +32,7 @@ module.exports = generator.extend({
   writing() {
     const { moduleName, filterName } = this.answers;
 
-    _.forEach(['filter.ejs', 'filter.spec.ejs'], tplName => this.fs.copyTpl(
+    _.forEach(['filter.js.ejs', 'filter.spec.js.ejs'], tplName => this.fs.copyTpl(
       this.templatePath(tplName),
       this.destinationPath(createDestFilename(filterName, !!tplName.match(/spec/i))),
       {

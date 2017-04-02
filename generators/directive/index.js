@@ -33,7 +33,7 @@ module.exports = generator.extend({
     const { moduleName, directiveName } = this.answers;
 
     this.fs.copyTpl(
-      this.templatePath('directive.ejs'),
+      this.templatePath('directive.js.ejs'),
       this.destinationPath(createDestFilename(directiveName)),
       {
         moduleName,

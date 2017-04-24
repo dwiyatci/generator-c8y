@@ -10,7 +10,7 @@
     <%= widgetConstantsName %>,
     gettext
   ) {
-    var service = {
+    const service = {
       create: create
     };
 
@@ -18,24 +18,25 @@
 
     ////////////
 
-    function create(options) {
-      var container = options.container || $('<div>');
-      var dataset;
-      var margin;
-      var w;
-      var h;
-      var chart;
-      var xScale;
-      var yScale;
-      var bandwidth;
-      var colorScale;
-      var lLayout;
-      var formatAsPercentage;
+    function create(
+      { container } = { container: $('<div>') }
+    ) {
+      let dataset;
+      let margin;
+      let w;
+      let h;
+      let chart;
+      let xScale;
+      let yScale;
+      let bandwidth;
+      let colorScale;
+      let lLayout;
+      let formatAsPercentage;
 
-      var api = {
-        redraw: redraw,
-        clear: clear,
-        drawDataset: drawDataset
+      const api = {
+        redraw,
+        clear,
+        drawDataset
       };
 
       return api;
@@ -55,8 +56,8 @@
         }
       }
 
-      function drawDataset(ds) {
-        dataset = ds || [];
+      function drawDataset(ds = []) {
+        dataset = ds;
 
         setupVariables();
         setupChartSvg();
@@ -120,14 +121,14 @@
           .attr('height', h + margin.top + margin.bottom)
           .append('g')
           .attr('class', 'chart')
-          .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+          .attr('transform', `translate(${margin.left}, ${margin.top})`);
       }
 
       function drawXAxis() {
         chart
           .append('g')
           .attr('class', 'axis')
-          .attr('transform', 'translate(0, ' + h + ')')
+          .attr('transform', `translate(0, ${h})`)
           .call(createXAxis());
       }
 

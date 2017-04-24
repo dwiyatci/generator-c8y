@@ -9,7 +9,7 @@
   function serviceDecorator(
     $delegate
   ) {
-    var originalMethod = $delegate.method;
+    const originalMethod = $delegate.method;
 
     $delegate.method = decoratedMethod;
 
@@ -18,7 +18,7 @@
     ////////////
 
     function decoratedMethod() {
-      var result = originalMethod.apply(this, arguments);
+      const result = originalMethod.apply(this, arguments);
 
       return result;
     }

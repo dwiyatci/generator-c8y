@@ -13,7 +13,7 @@
     });
 
   function Controller() {
-    var vm = this;
+    const vm = this;
 
     vm.$onInit = onInit;
 

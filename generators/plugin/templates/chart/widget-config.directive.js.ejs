@@ -7,7 +7,7 @@
 
   /* @ngInject */
   function chartWidgetConfig() {
-    var ddo = {
+    const ddo = {
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
       scope: {
@@ -22,7 +22,7 @@
 
   /* @ngInject */
   function Controller($scope) {
-    var vm = this;
+    const vm = this;
 
     activate();
 

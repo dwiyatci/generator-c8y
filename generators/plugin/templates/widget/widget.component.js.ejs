@@ -14,7 +14,7 @@
 
   /* @ngInject */
   function Controller(<%= widgetDataServiceName %>) {
-    var vm = this;
+    const vm = this;
 
     _.assign(vm, {
       $onInit: onInit,
@@ -34,11 +34,11 @@
     }
 
     function onDeviceChange() {
-      var device = vm.device;
+      const { device } = vm;
 
       if (device) {
         <%= widgetDataServiceName %>.getDataForDeviceId(device.id)
-          .then(_.curry(_.set)(vm, 'data', _))
+          .then(data => (vm.data = data))
           .then(onDataChange);
       }
     }

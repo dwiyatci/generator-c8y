@@ -7,7 +7,7 @@
 
   /* @ngInject */
   function chartWidget(<%= widgetChartFactoryName %>) {
-    var ddo = {
+    const ddo = {
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget.html',
       scope: {
@@ -23,7 +23,7 @@
     ////////////
 
     function linkFunc(scope, el) {
-      var chart = <%= widgetChartFactoryName %>.create({
+      const chart = <%= widgetChartFactoryName %>.create({
         container: el.find('.chart-container')
       });
 
@@ -50,7 +50,7 @@
     $scope,
     <%= widgetDataServiceName %>
   ) {
-    var vm = this;
+    const vm = this;
 
     activate();
 
@@ -68,7 +68,7 @@
       if (device) {
         <%= widgetDataServiceName %>
           .getDataForDeviceId(device.id)
-          .then(_.curry(_.set)(vm, 'dataset', _));
+          .then(dataset => (vm.dataset = dataset));
       }
     }
   }

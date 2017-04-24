@@ -10,9 +10,7 @@
     c8ySystem
   ) {
     c8ySystem.getUIVersion()
-      .then(function (version) {
-        console.log(version);
-      });
+      .then((version) => console.log(version));
 
     // Put your fiddle code here.
     console.log('hello, world');

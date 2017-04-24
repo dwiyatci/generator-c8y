@@ -11,11 +11,11 @@
     $compile,
     $parse
   ) {
-    var ddo = $delegate[0];
-    var originalLinkFn = ddo.link;
+    const ddo = $delegate[0];
+    const { link:originalLinkFn } = ddo;
 
     ddo.compile = compile;
-    delete ddo.link;
+    _.unset(ddo, 'link');
 
     return $delegate;
 

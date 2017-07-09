@@ -18,9 +18,10 @@
 
     ////////////
 
-    function getDataForDeviceId(id) {
-      return $http.get(':::PLUGIN_PATH:::/fake-data.json')
-        .then(c8yBase.getResData);
+    async function getDataForDeviceId(id) {
+      const data = await $http.get(':::PLUGIN_PATH:::/fake-data.json').then(c8yBase.getResData);
+
+      return data;
     }
   }
 }());

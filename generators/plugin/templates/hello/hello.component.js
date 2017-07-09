@@ -12,14 +12,15 @@
       controllerAs: 'vm'
     });
 
+  /* @ngInject */
   function Controller() {
     const vm = this;
 
-    vm.$onInit = onInit;
+    _.assign(vm, { $onInit });
 
     ////////////
 
-    function onInit() {
+    function $onInit() {
       vm.text = vm.text || 'hello, world';
     }
   }

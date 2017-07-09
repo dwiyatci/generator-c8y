@@ -13,22 +13,25 @@
     });
 
   /* @ngInject */
-  function Controller($scope) {
+  function Controller() {
     const vm = this;
 
-    vm.$onInit = onInit;
-
-    $scope.$watch('vm.config.device', onDeviceChange, true);
+    _.assign(vm, {
+      $onInit,
+      $onChanges
+    });
 
     ////////////
 
-    function onInit() {
-
+    function $onInit() {
+      _.defaults(vm.config);
     }
 
-    function onDeviceChange(device) {
-      if (device) {
+    function $onChanges({ config }) {
+      if (config && vm.config) {
+        const { device } = vm.config;
 
+        console.log(device);
       }
     }
   }

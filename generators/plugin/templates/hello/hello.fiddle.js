@@ -9,10 +9,13 @@
   function runBlock(
     c8ySystem
   ) {
-    c8ySystem.getUIVersion()
-      .then((version) => console.log(version));
+    (async () => {
+      const version = await c8ySystem.getUIVersion();
 
-    // Put your fiddle code here.
-    console.log('hello, world');
+      console.log(version);
+
+      // Put your fiddle code here.
+      console.log('hello, world');
+    })();
   }
 }());

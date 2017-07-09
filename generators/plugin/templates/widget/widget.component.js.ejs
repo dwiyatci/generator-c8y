@@ -13,33 +13,37 @@
     });
 
   /* @ngInject */
-  function Controller(<%= widgetDataServiceName %>) {
+  function Controller(
+    <%= widgetDataServiceName %>
+  ) {
     const vm = this;
 
     _.assign(vm, {
-      $onInit: onInit,
-      $onChanges: onChanges
+      $onInit,
+      $onChanges
     });
 
     ////////////
 
-    function onInit() {
+    function $onInit() {
 
     }
 
-    function onChanges(changes) {
-      if (changes.device) {
+    function $onChanges({ device }) {
+      if (device) {
         onDeviceChange();
       }
     }
 
-    function onDeviceChange() {
+    async function onDeviceChange() {
       const { device } = vm;
 
       if (device) {
-        <%= widgetDataServiceName %>.getDataForDeviceId(device.id)
-          .then(data => (vm.data = data))
-          .then(onDataChange);
+        const data = await <%= widgetDataServiceName %>.getDataForDeviceId(device.id);
+
+        vm.data = data;
+
+        onDataChange();
       }
     }
 

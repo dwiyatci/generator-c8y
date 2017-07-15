@@ -47,7 +47,7 @@ module.exports = generator.extend({
               default: 'PoC'
             }
           ])
-          .then(answers => this.answers = answers);
+          .then(answers => (this.answers = answers));
       },
 
       hello() {
@@ -76,7 +76,7 @@ module.exports = generator.extend({
               default: createProbableModuleName(answers.widgetName)
             }).then(({ moduleName }) => _.assign(answers, { moduleName }))
           )
-          .then(answers => this.answers = answers);
+          .then(answers => (this.answers = answers));
       },
 
       chart() {
@@ -102,7 +102,7 @@ module.exports = generator.extend({
               default: createProbableModuleName(answers.widgetName)
             }).then(({ moduleName }) => _.assign(answers, { moduleName }))
           )
-          .then(answers => this.answers = answers);
+          .then(answers => (this.answers = answers));
       },
 
       translations() {

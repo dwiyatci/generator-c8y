@@ -40,7 +40,7 @@ module.exports = generator.extend({
               default: 'Hello world'
             }
           ])
-          .then(answers => this.answers = answers);
+          .then(answers => (this.answers = answers));
       }
     };
   },

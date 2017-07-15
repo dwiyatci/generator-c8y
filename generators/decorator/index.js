@@ -33,7 +33,7 @@ module.exports = generator.extend({
           default: 'example'
         }
       ])
-      .then(answers => this.answers = answers);
+      .then(answers => (this.answers = answers));
   },
 
   writing() {
@@ -53,7 +53,7 @@ module.exports = generator.extend({
 function createDestFilename(recipeName) {
   return _(recipeName)
     .chain()
-    .replace(/^c8y/i, '')
+    .replace(/^.{1,5}(?=[A-Z])/g, '')
     .words()
     .take(2)
     .kebabCase()

@@ -6,13 +6,15 @@
     .directive('<%= prefixedDirectiveName %>', <%= directiveName %>);
 
   function <%= directiveName %>() {
-    var ddo = {
-      template: '<div>{{vm.prop}}</div>',
+    const ddo = {
+      template: `
+        <div>{{vm.prop}}</div>
+      `,
       scope: {
         prop: '<'
       },
-      controller: Controller,
       controllerAs: 'vm',
+      controller: Controller,
       bindToController: true,
       link: linkFunc
     };
@@ -26,7 +28,7 @@
 
   /* @ngInject */
   function Controller() {
-    var vm = this;
+    const vm = this;
 
 
   }

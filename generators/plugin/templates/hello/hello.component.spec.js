@@ -77,7 +77,7 @@ describe('c8y.pocs.hello: c8yHello component', () => {
       const $scope = _.assign($rootScope.$new(), bindings);
 
       const element = $compile(template)($scope);
-      $scope.$digest();
+      $scope.$apply();
 
       return element;
     }

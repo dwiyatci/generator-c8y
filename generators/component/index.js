@@ -26,7 +26,7 @@ module.exports = generator.extend({
           default: 'c8yExample'
         }
       ])
-      .then(answers => this.answers = answers);
+      .then(answers => (this.answers = answers));
   },
 
   writing() {
@@ -46,7 +46,7 @@ module.exports = generator.extend({
 function createDestFilename(componentName) {
   return _(componentName)
     .chain()
-    .replace(/^c8y/i, '')
+    .replace(/^.{1,5}(?=[A-Z])/g, '')
     .words()
     .takeRight(2)
     .kebabCase()

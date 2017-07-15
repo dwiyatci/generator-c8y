@@ -19,7 +19,8 @@
     ////////////
 
     async function getDataForDeviceId(id) {
-      const data = await $http.get(':::PLUGIN_PATH:::/fake-data.json').then(c8yBase.getResData);
+      const res = await $http.get(':::PLUGIN_PATH:::/fake-data.json');
+      const data = await c8yBase.getResData(res);
 
       return data;
     }

@@ -26,7 +26,7 @@ module.exports = generator.extend({
           default: 'example'
         }
       ])
-      .then(answers => this.answers = answers);
+      .then(answers => (this.answers = answers));
   },
 
   writing() {

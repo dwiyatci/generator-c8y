@@ -11,23 +11,26 @@
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
       scope: {
-        config: '&'
+        config: '<'
       },
+      controllerAs: 'vm',
       controller: Controller,
-      controllerAs: 'vm'
+      bindToController: true
     };
 
     return ddo;
   }
 
   /* @ngInject */
-  function Controller($scope) {
+  function Controller(
+    $scope
+  ) {
     const vm = this;
 
     activate();
 
-    $scope.$watch('config()', onConfigChange);
-    $scope.$watch('config().device', onDeviceChange);
+    $scope.$watch('vm.config', onConfigChange);
+    $scope.$watch('vm.config.device', onDeviceChange);
 
     ////////////
 
@@ -36,7 +39,7 @@
     }
 
     function onConfigChange(config) {
-      vm.config = config;
+
     }
 
     function onDeviceChange(device) {

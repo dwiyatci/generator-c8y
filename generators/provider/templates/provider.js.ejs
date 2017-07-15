@@ -7,11 +7,11 @@
 
   /* @ngInject */
   function <%= providerName %>Provider() {
-    var provider = this;
-    var configurableProperty;
+    const provider = this;
+    let configurableProperty;
 
     _.assign(provider, {
-      setConfigurableProperty: setConfigurableProperty,
+      setConfigurableProperty,
       $get: <%= providerName %>Service
     });
 
@@ -22,8 +22,8 @@
     }
 
     function <%= providerName %>Service() {
-      var service = {
-        method: method
+      const service = {
+        method
       };
 
       return service;
@@ -31,7 +31,7 @@
       ////////////
 
       function method() {
-        return 'hello, ' + configurableProperty;
+        return `hello, ${configurableProperty}`;
       }
     }
   }

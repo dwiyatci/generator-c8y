@@ -11,10 +11,11 @@
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget.html',
       scope: {
-        device: '&'
+        device: '<'
       },
-      controller: Controller,
       controllerAs: 'vm',
+      controller: Controller,
+      bindToController: true,
       link: linkFunc
     };
 
@@ -54,7 +55,7 @@
 
     activate();
 
-    $scope.$watch('device()', onDeviceChange);
+    $scope.$watch('vm.device', onDeviceChange);
 
     ////////////
 
@@ -62,13 +63,10 @@
 
     }
 
-    function onDeviceChange(device) {
-      vm.device = device;
-
+    async function onDeviceChange(device) {
       if (device) {
-        <%= widgetDataServiceName %>
-          .getDataForDeviceId(device.id)
-          .then(dataset => (vm.dataset = dataset));
+        vm.dataset = await <%= widgetDataServiceName %>.getDataForDeviceId(device.id);
+        $scope.$apply();
       }
     }
   }

@@ -8,8 +8,8 @@
       bindings: {
         text: '@'
       },
-      controller: Controller,
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      controller: Controller
     });
 
   /* @ngInject */

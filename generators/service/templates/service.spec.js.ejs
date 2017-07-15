@@ -1,45 +1,47 @@
-describe('<%= moduleName %>: <%= serviceName %> service', function () {
-  var $injector;
-  var $rootScope;
-  var $q;
-  var $http;
-  var $httpBackend;
-  var <%= serviceName %>;
+describe('<%= moduleName %>: <%= serviceName %> service', () => {
+  let $injector;
+  let $rootScope;
+  let $q;
+  let $http;
+  let $httpBackend;
+  let <%= serviceName %>;
 
-  beforeEach(function () {
+  beforeEach(() => {
     common.globalBeforeWithUI();
     module('<%= moduleName %>');
 
-    inject(function (
-      _$injector_,
-      _$rootScope_,
-      _$q_,
-      _$http_,
-      _$httpBackend_
-    ) {
-      $injector = _$injector_;
-      $rootScope = _$rootScope_;
-      $q = _$q_;
-      $http = _$http_;
-      $httpBackend = _$httpBackend_;
-      <%= serviceName %> = $injector.get('<%= serviceName %>');
-    });
+    inject(
+      (
+        _$injector_,
+        _$rootScope_,
+        _$q_,
+        _$http_,
+        _$httpBackend_
+      ) => {
+        $injector = _$injector_;
+        $rootScope = _$rootScope_;
+        $q = _$q_;
+        $http = _$http_;
+        $httpBackend = _$httpBackend_;
+        <%= serviceName %> = $injector.get('<%= serviceName %>');
+      }
+    );
   });
 
-  describe('testing method', function () {
-    //var exampleStub;
+  describe('testing method', () => {
+    //let exampleStub;
 
-    beforeEach(function () {
+    beforeEach(() => {
       //////////// stubbing dependencies
 
       //exampleStub = spyOn($injector.get('exampleDependency'), 'method');
     });
 
-    it('should return "hello, world"', function () {
+    it('should return "hello, world"', () => {
       // given
 
       // when
-      var actual = <%= serviceName %>.method();
+      const actual = <%= serviceName %>.method();
 
       // then
       expect(actual)

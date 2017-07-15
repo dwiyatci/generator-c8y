@@ -18,7 +18,7 @@ module.exports = generator.extend({
         message: 'Your module name',
         default: 'c8y.example'
       }
-    ]).then(answers => this.answers = answers);
+    ]).then(answers => (this.answers = answers));
   },
 
   writing() {

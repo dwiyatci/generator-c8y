@@ -8,8 +8,8 @@
       bindings: {
         device: '<'
       },
-      controller: Controller,
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      controller: Controller
     });
 
   /* @ngInject */
@@ -29,9 +29,9 @@
 
     }
 
-    function $onChanges({ device }) {
+    async function $onChanges({ device }) {
       if (device) {
-        onDeviceChange();
+        await onDeviceChange();
       }
     }
 

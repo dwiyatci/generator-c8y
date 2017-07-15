@@ -1,22 +1,26 @@
-describe('<%= moduleName %>: <%= filterName %> filter', function () {
-  var <%= filterName %>;
+describe('<%= moduleName %>: <%= filterName %> filter', () => {
+  let <%= filterName %>;
 
-  beforeEach(function () {
+  beforeEach(() => {
     common.globalBeforeWithUI();
     module('<%= moduleName %>');
 
-    inject(function ($filter) {
-      <%= filterName %> = $filter('<%= filterName %>');
-    });
+    inject(
+      (
+        $filter
+      ) => {
+        <%= filterName %> = $filter('<%= filterName %>');
+      }
+    );
   });
 
-  describe('testing filter', function () {
-    it('should correctly format the output', function () {
+  describe('testing filter', () => {
+    it('should correctly format the output', () => {
       // given
-      var input = 'hello, world';
+      const input = 'hello, world';
 
       // when
-      var output = <%= filterName %>(input);
+      const output = <%= filterName %>(input);
 
       // then
       expect(output)

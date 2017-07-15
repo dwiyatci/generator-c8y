@@ -4,39 +4,33 @@
   angular
     .module('<%= moduleName %>')
     .component('<%= prefixedComponentName %>', {
-      template: '<div>{{vm.prop}}</div>',
+      template: `
+        <div>{{vm.prop}}</div>
+      `,
       bindings: {
         prop: '<'
       },
-      controller: Controller,
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      controller: Controller
     });
 
   /* @ngInject */
   function Controller() {
-    var vm = this;
+    const vm = this;
 
     _.assign(vm, {
-      $onInit: onInit,
-      $onChanges: onChanges
+      $onInit,
+      $onChanges
     });
 
     ////////////
 
-    function onInit() {
+    function $onInit() {
 
     }
 
-    function onChanges(changes) {
-      if (changes.prop) {
-        onPropChange();
-      }
-    }
-
-    function onPropChange() {
-      var prop = vm.prop;
-
-      if (prop) {
+    function $onChanges({ prop }) {
+      if (prop && vm.prop) {
 
       }
     }

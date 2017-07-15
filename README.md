@@ -10,12 +10,12 @@
 As usual, it all started with laziness. Laziness in repeating the same thing over and over again. :stuck_out_tongue_winking_eye: Then with bits of creativity and big interest in automation, comes this hobby project. :speedboat:
 
 ## Installation
-* Make sure you have Node.js ≥ v6.10.0 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
+* Make sure you have Node.js ≥ v6.11.0 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
 
 * Install Yeoman, he's a cool guy. :-) Get to know more about him here: http://yeoman.io/.
 
 ```bash
-$ npm install -g yo
+$ npm isntall -g yo
 ```
 
 * Install the generator:

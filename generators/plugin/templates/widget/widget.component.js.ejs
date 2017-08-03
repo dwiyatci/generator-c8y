@@ -18,16 +18,9 @@
   ) {
     const vm = this;
 
-    _.assign(vm, {
-      $onInit,
-      $onChanges
-    });
+    _.assign(vm, { $onChanges });
 
     ////////////
-
-    function $onInit() {
-
-    }
 
     async function $onChanges({ device }) {
       if (device) {
@@ -36,19 +29,11 @@
     }
 
     async function onDeviceChange() {
-      const { device } = vm;
+      const deviceId = _.get(vm, 'device.id');
 
-      if (device) {
-        const data = await <%= widgetDataServiceName %>.getDataForDeviceId(device.id);
-
-        vm.data = data;
-
-        onDataChange();
+      if (deviceId) {
+        vm.data = await <%= widgetDataServiceName %>.getDataForDeviceId(deviceId);
       }
-    }
-
-    function onDataChange() {
-
     }
   }
 }());

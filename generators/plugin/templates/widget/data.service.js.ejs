@@ -18,10 +18,13 @@
 
     ////////////
 
-    async function getDataForDeviceId(id) {
-      const data = await <%= widgetFakeDataServiceName %>.getDataForDeviceId(id);
+    function getDataForDeviceId(id) {
+      const dataPromise = <%= widgetFakeDataServiceName %>.getDataForDeviceId(id);
 
-      return _.transform(data);
+      return dataPromise
+        .then((data) => {
+          return _.transform(data);
+        });
     }
   }
 }());

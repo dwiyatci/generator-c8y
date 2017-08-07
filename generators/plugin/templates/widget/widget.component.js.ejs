@@ -14,6 +14,7 @@
 
   /* @ngInject */
   function Controller(
+    $scope,
     <%= widgetDataServiceName %>
   ) {
     const vm = this;
@@ -33,6 +34,7 @@
 
       if (deviceId) {
         vm.data = await <%= widgetDataServiceName %>.getDataForDeviceId(deviceId);
+        $scope.apply();
       }
     }
   }

@@ -197,6 +197,7 @@ function createWidgetContext({ widgetName, widgetDesc, moduleName }) {
     widgetDataServiceName: createWidgetDataServiceName(widgetName),
     widgetComponentName: createWidgetComponentName(widgetName),
     widgetConfigComponentName: createWidgetConfigComponentName(widgetName),
+    widgetConfigFormName: createWidgetConfigFormName(widgetName),
     widgetHtmlTagName: createWidgetHtmlTagName(widgetName),
     widgetConfigHtmlTagName: createWidgetConfigHtmlTagName(widgetName),
     widgetCssClassName: createWidgetCssClassName(widgetName),
@@ -239,6 +240,10 @@ function createWidgetDataServiceName(widgetName) {
 
 function createWidgetComponentName(widgetName) {
   return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}Widget`;
+}
+
+function createWidgetConfigFormName(widgetName) {
+  return `${createCamelCasedWidgetName(widgetName)}WidgetConfigForm`;
 }
 
 function createWidgetConfigComponentName(widgetName) {

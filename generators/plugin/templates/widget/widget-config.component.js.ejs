@@ -15,6 +15,7 @@
   /* @ngInject */
   function Controller() {
     const vm = this;
+    const defaultConfig = {};
 
     _.assign(vm, {
       $onInit,
@@ -24,7 +25,7 @@
     ////////////
 
     function $onInit() {
-      _.defaults(vm.config);
+      _.defaults(vm.config, defaultConfig);
     }
 
     function $onChanges({ config }) {

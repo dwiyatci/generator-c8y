@@ -6,7 +6,9 @@
     .directive('<%= widgetComponentName %>', chartWidget);
 
   /* @ngInject */
-  function chartWidget(<%= widgetChartFactoryName %>) {
+  function chartWidget(
+    <%= widgetChartFactoryName %>
+  ) {
     const ddo = {
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget.html',
@@ -48,7 +50,6 @@
 
   /* @ngInject */
   function Controller(
-    $scope,
     <%= widgetDataServiceName %>
   ) {
     const vm = this;
@@ -63,10 +64,10 @@
 
     }
 
-    async function onDeviceChange(device) {
+    function onDeviceChange(device) {
       if (device) {
-        vm.dataset = await <%= widgetDataServiceName %>.getDataForDeviceId(device.id);
-        $scope.$apply();
+        <%= widgetDataServiceName %>.getDataForDeviceId(device.id)
+          .then(dataset => (vm.dataset = dataset));
       }
     }
   }

@@ -14,7 +14,6 @@
 
   /* @ngInject */
   function Controller(
-    $scope,
     <%= widgetDataServiceName %>
   ) {
     const vm = this;
@@ -23,18 +22,18 @@
 
     ////////////
 
-    async function $onChanges({ device }) {
+    function $onChanges({ device }) {
       if (device) {
-        await onDeviceChange();
+        onDeviceChange();
       }
     }
 
-    async function onDeviceChange() {
+    function onDeviceChange() {
       const deviceId = _.get(vm, 'device.id');
 
       if (deviceId) {
-        vm.data = await <%= widgetDataServiceName %>.getDataForDeviceId(deviceId);
-        $scope.apply();
+        <%= widgetDataServiceName %>.getDataForDeviceId(deviceId)
+          .then(data => (vm.data = data));
       }
     }
   }

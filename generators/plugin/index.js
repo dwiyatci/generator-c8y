@@ -4,14 +4,15 @@
 
 const { readdirSync } = require('fs');
 const _ = require('lodash');
-const generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.extend({
-  constructor: function (args, opts) {
-    generator.prototype.constructor(args, opts);
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
 
     this.argument('type', { type: String, required: false });
-  },
+    //this.option('experimental', { description: 'Enable experimental features', alias: 'x' });
+  }
 
   prompting() {
     let promptingAction = this._getPromptingActions()[this.options.type];
@@ -21,7 +22,7 @@ module.exports = generator.extend({
     }
 
     return promptingAction.call(this);
-  },
+  }
 
   _getPromptingActions() {
     return {
@@ -108,7 +109,7 @@ module.exports = generator.extend({
       translations() {
       }
     };
-  },
+  }
 
   writing() {
     let writingAction = this._getWritingActions()[this.options.type];
@@ -117,8 +118,8 @@ module.exports = generator.extend({
       writingAction = this._getWritingActions().hello;
     }
 
-    writingAction.call(this);
-  },
+    writingAction.call(this, this.options);
+  }
 
   _getWritingActions() {
     return {
@@ -135,11 +136,15 @@ module.exports = generator.extend({
           this.templatePath('hello'), this.destinationPath('hello'));
       },
 
-      widget() {
+      widget({ experimental }) {
         writeWidgetFiles.call(this, {
           answers: this.answers,
-          templateFilenames: readdirSync(this.templatePath('widget')),
-          parentDir: 'widget'
+          templateFilenames: _.reject(
+            readdirSync(this.templatePath('widget')),
+            experimental ? (filename => filename.match(/^(main|config)\.html/i)) : _.noop
+          ),
+          parentDir: 'widget',
+          experimental
         });
       },
 
@@ -166,12 +171,12 @@ module.exports = generator.extend({
       }
     };
   }
-});
+};
 
 ////////////
 
-function writeWidgetFiles({ answers, templateFilenames, parentDir }) {
-  const context = createWidgetContext(answers);
+function writeWidgetFiles({ answers, templateFilenames, parentDir, experimental }) {
+  const context = createWidgetContext(answers, experimental);
 
   _.forEach(templateFilenames, templateFilename =>
     this.fs.copyTpl(
@@ -185,8 +190,9 @@ function writeWidgetFiles({ answers, templateFilenames, parentDir }) {
   );
 }
 
-function createWidgetContext({ widgetName, widgetDesc, moduleName }) {
+function createWidgetContext({ widgetName, widgetDesc, moduleName }, experimental) {
   return {
+    experimental,
     widgetDesc,
     moduleName,
     pluginName: createPluginName(widgetName),

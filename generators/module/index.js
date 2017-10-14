@@ -3,12 +3,12 @@
  */
 
 const _ = require('lodash');
-const generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.extend({
-  constructor: function (args, opts) {
-    generator.prototype.constructor(args, opts);
-  },
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+  }
 
   prompting() {
     return this.prompt([
@@ -19,7 +19,7 @@ module.exports = generator.extend({
         default: 'c8y.example'
       }
     ]).then(answers => (this.answers = answers));
-  },
+  }
 
   writing() {
     const { moduleName } = this.answers;
@@ -30,7 +30,7 @@ module.exports = generator.extend({
       { moduleName }
     );
   }
-});
+};
 
 function createDestFilename(moduleName) {
   return _(moduleName)

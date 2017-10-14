@@ -3,14 +3,14 @@
  */
 
 const _ = require('lodash');
-const generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.extend({
-  constructor: function (args, opts) {
-    generator.prototype.constructor(args, opts);
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
 
     this.argument('type', { type: String, required: false });
-  },
+  }
 
   prompting() {
     let promptingAction = this._getPromptingActions()[this.options.type];
@@ -20,7 +20,7 @@ module.exports = generator.extend({
     }
 
     return promptingAction.call(this);
-  },
+  }
 
   _getPromptingActions() {
     return {
@@ -43,7 +43,7 @@ module.exports = generator.extend({
           .then(answers => (this.answers = answers));
       }
     };
-  },
+  }
 
   writing() {
     let writingAction = this._getWritingActions()[this.options.type];
@@ -53,7 +53,7 @@ module.exports = generator.extend({
     }
 
     writingAction.call(this);
-  },
+  }
 
   _getWritingActions() {
     return {
@@ -71,4 +71,4 @@ module.exports = generator.extend({
       },
     };
   }
-});
+};

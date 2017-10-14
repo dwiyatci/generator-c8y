@@ -3,12 +3,12 @@
  */
 
 const _ = require('lodash');
-const generator = require('yeoman-generator');
+const Generator = require('yeoman-generator');
 
-module.exports = generator.extend({
-  constructor: function (args, opts) {
-    generator.prototype.constructor(args, opts);
-  },
+module.exports = class extends Generator {
+  constructor(args, opts) {
+    super(args, opts);
+  }
 
   prompting() {
     return this.prompt(
@@ -27,21 +27,21 @@ module.exports = generator.extend({
         }
       ])
       .then(answers => (this.answers = answers));
-  },
+  }
 
   writing() {
     const { moduleName, filterName } = this.answers;
 
     _.forEach(['filter.js.ejs', 'filter.spec.js.ejs'], tplName => this.fs.copyTpl(
       this.templatePath(tplName),
-      this.destinationPath(createDestFilename(filterName, !!tplName.match(/spec/i))),
+      this.destinationPath(createDestFilename(filterName, tplName.match(/spec/i))),
       {
         moduleName,
         filterName
       }
     ));
   }
-});
+};
 
 function createDestFilename(filterName, spec) {
   return _(filterName)

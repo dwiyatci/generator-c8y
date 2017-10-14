@@ -11,7 +11,7 @@ module.exports = class extends Generator {
     super(args, opts);
 
     this.argument('type', { type: String, required: false });
-    //this.option('experimental', { description: 'Enable experimental features', alias: 'x' });
+    this.option('experimental', { description: 'Enable experimental features', alias: 'x' });
   }
 
   prompting() {

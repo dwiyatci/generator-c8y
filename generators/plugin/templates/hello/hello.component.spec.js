@@ -1,4 +1,6 @@
 describe('c8y.pocs.hello: c8yHello component', () => {
+  'use strict';
+
   let $injector;
   let $rootScope;
   let $compile;

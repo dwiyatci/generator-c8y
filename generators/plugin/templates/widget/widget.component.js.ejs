@@ -6,7 +6,7 @@
     .component('<%= widgetComponentName %>', {
       templateUrl: ':::PLUGIN_PATH:::/widget.html',
       bindings: {
-        device: '<'
+        config: '<'
       },
       controllerAs: 'vm',
       controller: Controller
@@ -22,18 +22,18 @@
 
     ////////////
 
-    function $onChanges({ device }) {
-      if (device) {
-        onDeviceChange();
+    function $onChanges({ config }) {
+      if (config) {
+        oncConfigChange(vm.config);
       }
     }
 
-    function onDeviceChange() {
-      const deviceId = _.get(vm, 'device.id');
+    function onConfigChange(config) {
+      const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
         <%= widgetDataServiceName %>.getDataForDeviceId(deviceId)
-          .then(data => (vm.data = data));
+          .then((data) => { vm.data = data; });
       }
     }
   }

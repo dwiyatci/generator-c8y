@@ -1,4 +1,6 @@
 describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
+  'use strict';
+
   let $injector;
   let $httpBackend;
   let dataService;
@@ -33,7 +35,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
       //////////// stubbing dependencies
 
-      //dataPromiseStub = spyOn($injector.get('c8yMeasurements'), 'list');
+      // dataPromiseStub = spyOn($injector.get('c8yMeasurements'), 'list');
     });
 
     it('should return correct data', () => {
@@ -41,7 +43,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       const deviceId = 42;
 
       // when
-      //dataPromiseStub
+      // dataPromiseStub
       //  .and.returnValue(fakeDataService.getDataForDeviceId(deviceId));
 
       dataService.getDataForDeviceId(deviceId)

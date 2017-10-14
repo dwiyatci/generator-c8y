@@ -27,7 +27,9 @@
       ////////////
 
       function link(scope, el, attrs, controller) {
-        originalLinkFn && originalLinkFn.apply(this, arguments);
+        if (originalLinkFn) {
+          originalLinkFn.apply(this, [scope, el, attrs, controller]);
+        }
       }
     }
   }

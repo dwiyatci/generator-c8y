@@ -1,4 +1,6 @@
 describe('<%= moduleName %>: <%= serviceName %> service', () => {
+  'use strict';
+
   let $injector;
   let $rootScope;
   let $q;
@@ -29,12 +31,12 @@ describe('<%= moduleName %>: <%= serviceName %> service', () => {
   });
 
   describe('testing method', () => {
-    //let exampleStub;
+    // let exampleStub;
 
     beforeEach(() => {
       //////////// stubbing dependencies
 
-      //exampleStub = spyOn($injector.get('exampleDependency'), 'method');
+      // exampleStub = spyOn($injector.get('exampleDependency'), 'method');
     });
 
     it('should return "hello, world"', () => {

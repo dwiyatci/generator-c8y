@@ -67,7 +67,7 @@
     function onDeviceChange(device) {
       if (device) {
         <%= widgetDataServiceName %>.getDataForDeviceId(device.id)
-          .then(dataset => (vm.dataset = dataset));
+          .then((dataset) => { vm.dataset = dataset; });
       }
     }
   }

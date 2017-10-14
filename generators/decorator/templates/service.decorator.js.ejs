@@ -17,8 +17,8 @@
 
     ////////////
 
-    function decoratedMethod() {
-      const result = originalMethod.apply(this, arguments);
+    function decoratedMethod(...args) {
+      const result = originalMethod.apply(this, args);
 
       return result;
     }

@@ -9,7 +9,7 @@
   function serviceDecorator(
     $delegate
   ) {
-    const { method:originalMethod } = $delegate;
+    const { method: originalMethod } = $delegate;
 
     $delegate.method = decoratedMethod;
 

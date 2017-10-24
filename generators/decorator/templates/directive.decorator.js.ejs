@@ -11,8 +11,8 @@
     $compile,
     $parse
   ) {
-    const ddo = $delegate[0];
-    const { link:originalLinkFn } = ddo;
+    const [ddo] = $delegate;
+    const { link: originalLinkFn } = ddo;
 
     ddo.compile = compile;
     _.unset(ddo, 'link');

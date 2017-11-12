@@ -2,6 +2,15 @@
   class="<%= widgetConfigCssClassName %>"
   name="<%= widgetConfigFormName %>"
 >
-  <label translate>Widget config</label>
-  <pre>Widget config here...</pre>
+  <div
+    class="form-group"
+    ng-class="{'has-error': <%= widgetConfigFormName %>.aWidgetConfigItem.$invalid}"
+  >
+    <label translate>A widget config item</label>
+    <input
+      class="form-control"
+      name="aWidgetConfigItem"
+      ng-model="vm.config.aWidgetConfigItem"
+    >
+  </div>
 </ng-form>

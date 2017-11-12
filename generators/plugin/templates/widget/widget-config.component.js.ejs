@@ -17,29 +17,12 @@
     const vm = this;
     const defaultConfig = {};
 
-    _.assign(vm, {
-      $onInit,
-      $onChanges
-    });
+    _.assign(vm, { $onInit });
 
     ////////////
 
     function $onInit() {
       _.defaults(vm.config, defaultConfig);
-    }
-
-    function $onChanges({ config }) {
-      if (config) {
-        onConfigChange(vm.config);
-      }
-    }
-
-    function onConfigChange(config) {
-      const deviceId = _.get(config, 'device.id');
-
-      if (deviceId) {
-        console.log(deviceId);
-      }
     }
   }
 }());

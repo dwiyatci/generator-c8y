@@ -11,15 +11,15 @@
     <%= widgetFakeDataServiceName %>
   ) {
     const service = {
-      getDataForDeviceId
+      getDataFor
     };
 
     return service;
 
     ////////////
 
-    function getDataForDeviceId(id) {
-      const dataPromise = <%= widgetFakeDataServiceName %>.getDataForDeviceId(id);
+    function getDataFor(id) {
+      const dataPromise = <%= widgetFakeDataServiceName %>.getDataFor(id);
 
       return dataPromise
         .then((data) => {

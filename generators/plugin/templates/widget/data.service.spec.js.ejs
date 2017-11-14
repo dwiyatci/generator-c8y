@@ -46,9 +46,9 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
       // when
       // dataPromiseStub
-      //  .and.returnValue(fakeDataService.getDataForDeviceId(deviceId));
+      //  .and.returnValue(fakeDataService.getDataFor(deviceId));
 
-      dataService.getDataForDeviceId(deviceId)
+      dataService.getDataFor(deviceId)
         .then((data) => {
           const expectedData = [];
 

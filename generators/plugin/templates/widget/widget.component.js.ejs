@@ -32,7 +32,7 @@
       const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
-        <%= widgetDataServiceName %>.getDataForDeviceId(deviceId)
+        <%= widgetDataServiceName %>.getDataFor(deviceId)
           .then((data) => { vm.data = data; });
       }
     }

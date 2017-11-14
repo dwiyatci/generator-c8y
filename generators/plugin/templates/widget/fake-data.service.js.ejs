@@ -11,14 +11,14 @@
     c8yBase
   ) {
     const service = {
-      getDataForDeviceId
+      getDataFor
     };
 
     return service;
 
     ////////////
 
-    function getDataForDeviceId(id) {
+    function getDataFor(id) {
       return $http.get(':::PLUGIN_PATH:::/fake-data.json')
         .then(c8yBase.getResData);
     }

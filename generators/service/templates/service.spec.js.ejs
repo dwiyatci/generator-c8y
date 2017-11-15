@@ -12,22 +12,14 @@ describe('<%= moduleName %>: <%= serviceName %> service', () => {
     common.globalBeforeWithUI();
     module('<%= moduleName %>');
 
-    inject(
-      (
-        _$injector_,
-        _$rootScope_,
-        _$q_,
-        _$http_,
-        _$httpBackend_
-      ) => {
-        $injector = _$injector_;
-        $rootScope = _$rootScope_;
-        $q = _$q_;
-        $http = _$http_;
-        $httpBackend = _$httpBackend_;
-        <%= serviceName %> = $injector.get('<%= serviceName %>');
-      }
-    );
+    inject((_$injector_) => {
+      $injector = _$injector_;
+      $rootScope = $injector.get('$rootScope');
+      $q = $injector.get('$q');
+      $http = $injector.get('$http');
+      $httpBackend = $injector.get('$httpBackend');
+      <%= serviceName %> = $injector.get('<%= serviceName %>');
+    });
   });
 
   describe('testing method', () => {

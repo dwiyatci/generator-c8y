@@ -7,13 +7,9 @@ describe('<%= moduleName %>: <%= filterName %> filter', () => {
     common.globalBeforeWithUI();
     module('<%= moduleName %>');
 
-    inject(
-      (
-        $filter
-      ) => {
-        <%= filterName %> = $filter('<%= filterName %>');
-      }
-    );
+    inject(($filter) => {
+      <%= filterName %> = $filter('<%= filterName %>');
+    });
   });
 
   describe('testing filter', () => {

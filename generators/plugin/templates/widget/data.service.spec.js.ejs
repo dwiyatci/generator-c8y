@@ -11,16 +11,11 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
     common.globalBeforeWithUI();
     module('<%= moduleName %>');
 
-    inject(
-      (
-        _$injector_,
-        _$httpBackend_
-      ) => {
-        $injector = _$injector_;
-        $httpBackend = _$httpBackend_;
-        dataService = $injector.get('<%= widgetDataServiceName %>');
-      }
-    );
+    inject((_$injector_) => {
+      $injector = _$injector_;
+      $httpBackend = $injector.get('$httpBackend');
+      dataService = $injector.get('<%= widgetDataServiceName %>');
+    });
   });
 
   describe('getting widget data', () => {

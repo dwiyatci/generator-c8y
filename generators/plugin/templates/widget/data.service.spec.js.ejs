@@ -1,10 +1,9 @@
-/* global readJSON */
-
 describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
   let $injector;
-  let $httpBackend;
+  let $rootScope;
+  let $q;
   let dataService;
 
   beforeEach(() => {
@@ -13,46 +12,43 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
     inject((_$injector_) => {
       $injector = _$injector_;
-      $httpBackend = $injector.get('$httpBackend');
+      $rootScope = $injector.get('$rootScope');
+      $q = $injector.get('$q');
       dataService = $injector.get('<%= widgetDataServiceName %>');
     });
   });
 
   describe('getting widget data', () => {
-    const fakeDataPath = ':::PLUGIN_PATH:::/fake-data.json';
-    let fakeDataService;
-    let dataPromiseStub;
+    let listMeasurementsStub;
 
     beforeEach(() => {
-      fakeDataService = $injector.get('<%= widgetFakeDataServiceName %>');
-
-      $httpBackend
-        .when('GET', fakeDataPath)
-        .respond(readJSON(`plugins/${fakeDataPath}`));
-
       //////////// stubbing dependencies
 
-      // dataPromiseStub = spyOn($injector.get('c8yMeasurements'), 'list');
+      // listMeasurementsStub = spyOn($injector.get('c8yMeasurements'), 'list');
     });
 
-    it('should return correct data', () => {
+    it('should return correct data', (done) => {
       // given
-      const deviceId = 42;
+      const filter = {};
+
+      const measurements = [];
+
+      const expectedData = [];
 
       // when
-      // dataPromiseStub
-      //  .and.returnValue(fakeDataService.getDataFor(deviceId));
+      // listMeasurementsStub
+      //  .and.callFake(() => $q.resolve(measurements));
 
-      dataService.getDataFor(deviceId)
+      dataService.getDataFor(filter)
         .then((data) => {
-          const expectedData = [];
-
           // then
           expect(data)
             .toEqual(expectedData);
+
+          done();
         });
 
-      $httpBackend.flush();
+      $rootScope.$apply();
     });
   });
 });

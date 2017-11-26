@@ -7,21 +7,17 @@
 
   /* @ngInject */
   function dataService(
-    <%= widgetConstantsName %>,
-    <%= widgetFakeDataServiceName %>
+    $q,
+    <%= widgetConstantsName %>
   ) {
-    const service = {
-      getDataFor
-    };
+    const service = { getDataFor };
 
     return service;
 
     ////////////
 
-    function getDataFor(id) {
-      const dataPromise = <%= widgetFakeDataServiceName %>.getDataFor(id);
-
-      return dataPromise
+    function getDataFor({ source }) {
+      return $q.resolve([])
         .then((data) => {
           console.log(data);
 

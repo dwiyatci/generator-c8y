@@ -19,7 +19,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   });
 
   describe('getting widget data', () => {
-    let listMeasurementsStub;
+    // let listMeasurementsStub;
 
     beforeEach(() => {
       //////////// stubbing dependencies
@@ -31,19 +31,19 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       // given
       const filter = {};
 
-      const measurements = [];
+      // const measurements = [];
 
-      const expectedData = [];
+      const expected = [];
 
       // when
       // listMeasurementsStub
-      //  .and.callFake(() => $q.resolve(measurements));
+      //  .and.callFake((predicate) => $q.resolve(_.filter(measurements, predicate)));
 
       dataService.getDataFor(filter)
-        .then((data) => {
+        .then((actual) => {
           // then
-          expect(data)
-            .toEqual(expectedData);
+          expect(actual)
+            .toEqual(expected);
 
           done();
         });

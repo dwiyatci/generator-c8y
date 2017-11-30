@@ -37,7 +37,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
       // when
       // listMeasurementsStub.and
-      //   .callFake((predicate) => $q.resolve(_.filter(measurements, predicate)));
+      //   .callFake(predicate => $q.resolve(_.filter(measurements, predicate)));
 
       dataService.getDataFor(filter)
         .then((actual) => {

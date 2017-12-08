@@ -10,19 +10,20 @@
     $q,
     <%= widgetConstantsName %>
   ) {
-    const service = { getDataFor };
+    const service = {
+      getDataFor
+    };
 
     return service;
 
     ////////////
 
-    function getDataFor({ source }) {
-      return $q.resolve([])
-        .then((data) => {
-          console.log(data);
+    async function getDataFor({ source }) {
+      const data = await $q.resolve([]);
 
-          return data;
-        });
+      console.log(data);
+
+      return data;
     }
   }
 }());

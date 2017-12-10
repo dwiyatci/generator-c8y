@@ -18,7 +18,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       $q = $injector.get('$q');
       // c8yStubsHelper = $injector.get('c8yStubsHelper');
       dataService = $injector.get('<%= widgetDataServiceName %>');
-      window.Promise = $q; // "naughty" trick to make async-await work in unit tests
+      window.Promise = $q;
     });
   });
 
@@ -36,16 +36,16 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
       // const measurements = [];
 
-      const expected = [];
+      const expectedData = [];
 
       // when
       // c8yMeasurements.list = c8yStubsHelper.createListMeasurementsFake(measurements);
 
       dataService.getDataFor(filter)
-        .then((actual) => {
+        .then((data) => {
           // then
-          expect(actual)
-            .toEqual(expected);
+          expect(data)
+            .toEqual(expectedData);
 
           done();
         });

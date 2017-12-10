@@ -10,19 +10,12 @@ describe('c8y.pocs.hello: c8yHello component', () => {
     common.globalBeforeWithUI();
     module('c8y.pocs.hello');
 
-    inject(
-      (
-        _$injector_,
-        _$rootScope_,
-        _$compile_,
-        _$componentController_
-      ) => {
-        $injector = _$injector_;
-        $rootScope = _$rootScope_;
-        $compile = _$compile_;
-        $componentController = _$componentController_;
-      }
-    );
+    inject((_$injector_) => {
+      $injector = _$injector_;
+      $rootScope = $injector.get('$rootScope');
+      $compile = $injector.get('$compile');
+      $componentController = $injector.get('$componentController');
+    });
   });
 
   it('component should exist', () => {
@@ -32,8 +25,7 @@ describe('c8y.pocs.hello: c8yHello component', () => {
 
   describe('displaying text', () => {
     beforeEach(() => {
-      //////////// stubbing dependencies
-
+      // dependencies to be stubbed
     });
 
     it('should display "hello, world" by default', () => {

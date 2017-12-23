@@ -25,7 +25,7 @@
 
     ////////////
 
-    function $onChanges({ config }: any) {
+    function $onChanges({ config }: ng.IOnChangesObject) {
       if (config) {
         onConfigChange(vm.config);
       }

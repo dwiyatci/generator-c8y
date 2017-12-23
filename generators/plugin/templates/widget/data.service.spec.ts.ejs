@@ -1,8 +1,6 @@
 describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
-  const { module } = angular.mock;
-
   let $injector: ng.auto.IInjectorService;
   let $rootScope: ng.IRootScopeService;
   let $q: ng.IQService;
@@ -12,8 +10,8 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
   beforeEach(() => {
     (<%- '<any>' %>window).common.globalBeforeWithUI();
-    // module('c8y.pocs.coreServiceStubsHelper');
-    module('<%= moduleName %>');
+    // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
+    angular.mock.module('<%= moduleName %>');
 
     inject((_$injector_: ng.auto.IInjectorService) => {
       $injector = _$injector_;

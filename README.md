@@ -49,6 +49,7 @@ I and my colleague, Jan Feuerbach, are working on another interesting generator 
 - [X] c8y:plugin chart
 - [X] c8y:plugin translations
 - [X] c8y:plugin widget --experimental (use new widget component API :microscope:)
+- [X] c8y:plugin widget --typescript (use TypeScript to write widget :lock_with_ink_pen:)
 
 ## Caveats
 * This generator is still on the experimental stage.

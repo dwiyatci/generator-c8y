@@ -12,6 +12,7 @@ module.exports = class extends Generator {
 
     this.argument('type', { type: String, required: false });
     this.option('experimental', { description: 'Use experimental features', alias: 'x' });
+    this.option('typescript', { description: 'Use TypeScript', alias: 't' });
   }
 
   prompting() {
@@ -136,13 +137,14 @@ module.exports = class extends Generator {
           this.templatePath('hello'), this.destinationPath('hello'));
       },
 
-      widget({ experimental }) {
+      widget({ experimental, typescript }) {
         writeWidgetFiles.call(this, {
           answers: this.answers,
-          templateFilenames: _.reject(
-            readdirSync(this.templatePath('widget')),
-            experimental ? (filename => filename.match(/^(main|config)\.html/i)) : _.noop
-          ),
+          templateFilenames: _(readdirSync(this.templatePath('widget')))
+            .reject(filename => filename.match(typescript ? /\.js\.ejs$/i : /\.ts\.ejs$/i))
+            .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
+            .value()
+          ,
           parentDir: 'widget',
           experimental
         });

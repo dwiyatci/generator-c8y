@@ -1,0 +1,27 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .config(configure);
+
+  /* @ngInject */
+  function configure(
+    c8yComponentsProvider: any,
+    gettext: ng.gettext.gettextFunction
+  ) {
+    c8yComponentsProvider.add({
+      name: '<%= camelCasedWidgetName %>',
+      nameDisplay: gettext('<%= capitalizedWidgetName %>'),
+      description: gettext('<%- widgetDesc %>'),
+      <%- experimental ? `widgetComponent: '${widgetComponentName}',` : "templateUrl: ':::PLUGIN_PATH:::/main.html'," %>
+      <%- experimental ? `configComponent: '${widgetConfigComponentName}',` : "configTemplateUrl: ':::PLUGIN_PATH:::/config.html'," %>
+      options: {
+        noDeviceTarget: false,
+        noNewWidgets: false,
+        deviceTargetNotRequired: false,
+        groupsSelectable: false
+      }
+    });
+  }
+}());

@@ -1,0 +1,32 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .component('<%= widgetConfigComponentName %>', {
+      templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
+      bindings: {
+        config: '<'
+      },
+      controllerAs: 'vm',
+      controller: Controller
+    });
+
+  /* @ngInject */
+  function Controller(
+    this: ng.IController
+  ) {
+    const vm = this;
+    const defaultConfig = {};
+
+    _.assign(vm, {
+      $onInit
+    });
+
+    ////////////
+
+    function $onInit() {
+      _.defaults(vm.config, defaultConfig);
+    }
+  }
+}());

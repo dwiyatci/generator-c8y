@@ -1,0 +1,29 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .factory('<%= widgetDataServiceName %>', dataService);
+
+  /* @ngInject */
+  function dataService(
+    $q: ng.IQService,
+    <%= widgetConstantsName %>: any
+  ) {
+    const service = {
+      getDataFor
+    };
+
+    return service;
+
+    ////////////
+
+    async function getDataFor(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
+      const data = await $q.resolve([]);
+
+      console.log(data);
+
+      return data;
+    }
+  }
+}());

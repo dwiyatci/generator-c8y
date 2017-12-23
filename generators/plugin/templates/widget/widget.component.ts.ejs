@@ -1,0 +1,43 @@
+(function () {
+  'use strict';
+
+  angular
+    .module('<%= moduleName %>')
+    .component('<%= widgetComponentName %>', {
+      templateUrl: ':::PLUGIN_PATH:::/widget.html',
+      bindings: {
+        config: '<'
+      },
+      controllerAs: 'vm',
+      controller: Controller
+    });
+
+  /* @ngInject */
+  function Controller(
+    this: ng.IController,
+    <%= widgetDataServiceName %>: any
+  ) {
+    const vm = this;
+
+    _.assign(vm, {
+      $onChanges
+    });
+
+    ////////////
+
+    function $onChanges({ config }: any) {
+      if (config) {
+        onConfigChange(vm.config);
+      }
+    }
+
+    function onConfigChange(config: any) {
+      const deviceId = _.get(config, 'device.id');
+
+      if (deviceId) {
+        <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
+          .then((data: any) => { vm.data = data; });
+      }
+    }
+  }
+}());

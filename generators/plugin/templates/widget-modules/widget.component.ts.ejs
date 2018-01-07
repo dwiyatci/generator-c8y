@@ -1,0 +1,37 @@
+export const <%= widgetComponentName %> = {
+  templateUrl: ':::PLUGIN_PATH:::/widget.html',
+  bindings: {
+    config: '<'
+  },
+  controllerAs: 'vm',
+  controller: Controller
+};
+
+/* @ngInject */
+function Controller(
+  this: angular.IController,
+  <%= widgetDataServiceName %>: any
+) {
+  const vm = this;
+
+  _.assign(vm, {
+    $onChanges
+  });
+
+  ////////////
+
+  function $onChanges({ config }: angular.IOnChangesObject) {
+    if (config) {
+      onConfigChange(vm.config);
+    }
+  }
+
+  function onConfigChange(config: any) {
+    const deviceId = _.get(config, 'device.id');
+
+    if (deviceId) {
+      <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
+        .then((data: any) => { vm.data = data; });
+    }
+  }
+}

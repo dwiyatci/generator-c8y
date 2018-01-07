@@ -1,0 +1,26 @@
+export const <%= widgetConfigComponentName %> = {
+  templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
+  bindings: {
+    config: '<'
+  },
+  controllerAs: 'vm',
+  controller: Controller
+};
+
+/* @ngInject */
+function Controller(
+  this: angular.IController
+) {
+  const vm = this;
+  const defaultConfig = {};
+
+  _.assign(vm, {
+    $onInit
+  });
+
+  ////////////
+
+  function $onInit() {
+    _.defaults(vm.config, defaultConfig);
+  }
+}

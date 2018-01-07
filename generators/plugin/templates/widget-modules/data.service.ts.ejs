@@ -1,0 +1,20 @@
+export function <%= widgetDataServiceName %>(
+  $q: angular.IQService,
+  <%= widgetConstantsName %>: any
+) {
+  const service = {
+    getDataFor
+  };
+
+  return service;
+
+  ////////////
+
+  async function getDataFor(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
+    const data = await $q.resolve([]);
+
+    console.log(data);
+
+    return data;
+  }
+}

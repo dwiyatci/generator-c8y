@@ -3,7 +3,7 @@ import { <%= widgetDataServiceName %> } from './data.service.js';
 import { <%= widgetComponentName %> } from './widget.component.js';
 import { <%= widgetConfigComponentName %> } from './widget-config.component.js';
 
-export const widgetModule = angular
+export default angular
   .module('<%= moduleName %>', [])
   .constant('<%= widgetConstantsName %>', <%= widgetConstantsName %>)
   .factory('<%= widgetDataServiceName %>', <%= widgetDataServiceName %>)

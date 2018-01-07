@@ -49,7 +49,8 @@ I and my colleague, Jan Feuerbach, are working on another interesting generator 
 - [X] c8y:plugin chart
 - [X] c8y:plugin translations
 - [X] c8y:plugin widget --experimental (use new widget component API :microscope:)
-- [X] c8y:plugin widget --typescript (use TypeScript to write widget :lock_with_ink_pen:)
+- [X] c8y:plugin widget --typescript (use TypeScript to write widget :lock_with_ink_pen:). Example [here](https://github.com/dwiyatci/cumulocity-unicornify-widget).
+- [X] c8y:plugin widget --typescript-nomods (use TypeScript without usage of import/export syntax)
 
 ## Caveats
 * This generator is still on the experimental stage.

@@ -1,26 +1,25 @@
 describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
-  let $injector: ng.auto.IInjectorService;
-  let $rootScope: ng.IRootScopeService;
-  let $q: ng.IQService;
-  let $window: ng.IWindowService;
+  const win: any = window;
+  let $injector: angular.auto.IInjectorService;
+  let $rootScope: angular.IRootScopeService;
+  let $q: angular.IQService;
   // let c8yStubsHelper: any;
   let dataService: any;
 
   beforeEach(() => {
-    (<%- '<any>' %>window).common.globalBeforeWithUI();
+    win.common.globalBeforeWithUI();
     // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
     angular.mock.module('<%= moduleName %>');
 
-    inject((_$injector_: ng.auto.IInjectorService) => {
+    inject((_$injector_: angular.auto.IInjectorService) => {
       $injector = _$injector_;
       $rootScope = $injector.get('$rootScope');
       $q = $injector.get('$q');
-      $window = $injector.get('$window');
       // c8yStubsHelper = $injector.get('c8yStubsHelper');
       dataService = $injector.get('<%= widgetDataServiceName %>');
-      $window.Promise = $q;
+      win.Promise = $q;
     });
   });
 
@@ -38,13 +37,13 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
       // const measurements = [];
 
-      const expectedData: any = [];
+      const expectedData = [];
 
       // when
       // c8yMeasurements.list = c8yStubsHelper.createListMeasurementsFake(measurements);
 
       dataService.getDataFor(filter)
-        .then((data: any) => {
+        .then((data) => {
           // then
           expect(data)
             .toEqual(expectedData);

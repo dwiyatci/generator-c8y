@@ -12,7 +12,8 @@ module.exports = class extends Generator {
 
     this.argument('type', { type: String, required: false });
     this.option('experimental', { description: 'Use experimental features', alias: 'x' });
-    this.option('typescript', { description: 'Use TypeScript', alias: 't' });
+    this.option('typescript', { description: 'Use TypeScript', alias: 'ts' });
+    this.option('typescript-nomods', { description: 'Use TypeScript (no import/export syntax)', alias: 'tsnm' });
   }
 
   prompting() {
@@ -137,15 +138,19 @@ module.exports = class extends Generator {
           this.templatePath('hello'), this.destinationPath('hello'));
       },
 
-      widget({ experimental, typescript }) {
+      widget({ experimental, typescript, ...opts }) {
+        const typescriptNoModules = opts['typescript-nomods'];
+        const tsEnabled = (typescript || typescriptNoModules);
+        const parentDir = typescript ? 'widget-modules' : 'widget';
+
         writeWidgetFiles.call(this, {
           answers: this.answers,
-          templateFilenames: _(readdirSync(this.templatePath('widget')))
-            .reject(filename => filename.match(typescript ? /\.js\.ejs$/i : /\.ts\.ejs$/i))
+          templateFilenames: _(readdirSync(this.templatePath(parentDir)))
+            .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts\.ejs$/i))
             .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
             .value()
           ,
-          parentDir: 'widget',
+          parentDir,
           experimental
         });
       },

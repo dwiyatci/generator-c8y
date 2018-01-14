@@ -9,8 +9,8 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
 
   beforeEach(() => {
     common.globalBeforeWithUI();
-    // module('c8y.pocs.coreServiceStubsHelper');
-    module('<%= moduleName %>');
+    // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
+    angular.mock.module('<%= moduleName %>');
 
     inject((_$injector_) => {
       $injector = _$injector_;

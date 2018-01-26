@@ -146,7 +146,7 @@ module.exports = class extends Generator {
         writeWidgetFiles.call(this, {
           answers: this.answers,
           templateFilenames: _(readdirSync(this.templatePath(parentDir)))
-            .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts\.ejs$/i))
+            .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i))
             .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
             .value()
           ,

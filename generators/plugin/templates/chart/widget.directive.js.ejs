@@ -50,6 +50,7 @@
 
   /* @ngInject */
   function Controller(
+    $rootScope,
     <%= widgetDataServiceName %>
   ) {
     const vm = this;
@@ -64,11 +65,12 @@
 
     }
 
-    function onDeviceChange(device) {
+    async function onDeviceChange(device) {
       if (device) {
-        <%= widgetDataServiceName %>.getDataFor(device.id)
-          .then((dataset) => { vm.dataset = dataset; });
+        vm.dataset = await <%= widgetDataServiceName %>.getDataFor(device.id);
       }
+
+      $rootScope.$apply();
     }
   }
 }());

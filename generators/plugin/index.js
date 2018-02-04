@@ -148,21 +148,23 @@ module.exports = class extends Generator {
           templateFilenames: _(readdirSync(this.templatePath(parentDir)))
             .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i))
             .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
-            .value()
-          ,
+            .value(),
           parentDir,
           experimental
         });
       },
 
-      chart() {
+      chart({ experimental }) {
         const answers = this.answers;
 
         writeWidgetFiles.call(this, {
           answers,
-          templateFilenames: _.reject(
-            readdirSync(this.templatePath('widget')), _.curry(_.includes)(_, 'component')),
-          parentDir: 'widget'
+          templateFilenames: _(readdirSync(this.templatePath('widget')))
+            .reject(filename => _.includes(filename, 'component') || _.includes(filename, '.ts'))
+            .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
+            .value(),
+          parentDir: 'widget',
+          experimental
         });
 
         writeWidgetFiles.call(this, {

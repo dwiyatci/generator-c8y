@@ -14,6 +14,7 @@
 
   /* @ngInject */
   function Controller(
+    $rootScope,
     <%= widgetDataServiceName %>
   ) {
     const vm = this;
@@ -30,13 +31,14 @@
       }
     }
 
-    function onConfigChange(config) {
+    async function onConfigChange(config) {
       const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
-        <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
-          .then((data) => { vm.data = data; });
+        vm.data = await <%= widgetDataServiceName %>.getDataFor({ source: deviceId });
       }
+
+      $rootScope.$apply();
     }
   }
 }());

@@ -1,5 +1,5 @@
 /**
- * Created by glenn on 2/26/17.
+ * Created by glenn on 26.02.17.
  */
 
 const { readdirSync } = require('fs');

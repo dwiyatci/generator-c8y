@@ -21,8 +21,8 @@
     "url": "https://github.com/dwiyatci/generator-c8y.git"
   },
   "dependencies": {
-    "lodash": "4.17.4",
-    "yeoman-generator": "2.0.2"
+    "lodash": "4.17.10",
+    "yeoman-generator": "2.0.5"
   },
   "scripts": {
     "install:clean": "yarn upgrade || yarn install"

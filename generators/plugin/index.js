@@ -11,7 +11,7 @@ module.exports = class extends Generator {
     super(args, opts);
 
     this.argument('type', { type: String, required: false });
-    this.option('experimental', { description: 'Use experimental features', alias: 'x' });
+    this.option('legacy', { description: 'Use legacy widget API', alias: 'l' });
     this.option('typescript', { description: 'Use TypeScript', alias: 'ts' });
     this.option('typescript-nomods', { description: 'Use TypeScript (no import/export syntax)', alias: 'tsnm' });
   }
@@ -138,7 +138,7 @@ module.exports = class extends Generator {
           this.templatePath('hello'), this.destinationPath('hello'));
       },
 
-      widget({ experimental, typescript, ...opts }) {
+      widget({ legacy, typescript, ...opts }) {
         const typescriptNoModules = opts['typescript-nomods'];
         const tsEnabled = (typescript || typescriptNoModules);
         const parentDir = typescript ? 'widget-modules' : 'widget';
@@ -147,24 +147,24 @@ module.exports = class extends Generator {
           answers: this.answers,
           templateFilenames: _(readdirSync(this.templatePath(parentDir)))
             .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i))
-            .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
+            .reject(legacy ? _.noop : (filename => filename.match(/^(main|config)\.html\.ejs$/i)))
             .value(),
           parentDir,
-          experimental
+          legacy
         });
       },
 
-      chart({ experimental }) {
+      chart({ legacy }) {
         const answers = this.answers;
 
         writeWidgetFiles.call(this, {
           answers,
           templateFilenames: _(readdirSync(this.templatePath('widget')))
             .reject(filename => _.includes(filename, 'component') || _.includes(filename, '.ts'))
-            .reject(experimental ? (filename => filename.match(/^(main|config)\.html\.ejs$/i)) : _.noop)
+            .reject(legacy ? _.noop : (filename => filename.match(/^(main|config)\.html\.ejs$/i)))
             .value(),
           parentDir: 'widget',
-          experimental
+          legacy
         });
 
         writeWidgetFiles.call(this, {
@@ -184,8 +184,8 @@ module.exports = class extends Generator {
 
 ////////////
 
-function writeWidgetFiles({ answers, templateFilenames, parentDir, experimental }) {
-  const context = createWidgetContext(answers, experimental);
+function writeWidgetFiles({ answers, templateFilenames, parentDir, legacy }) {
+  const context = createWidgetContext(answers, legacy);
 
   _.forEach(templateFilenames, templateFilename =>
     this.fs.copyTpl(
@@ -199,9 +199,9 @@ function writeWidgetFiles({ answers, templateFilenames, parentDir, experimental 
   );
 }
 
-function createWidgetContext({ widgetName, widgetDesc, moduleName }, experimental) {
+function createWidgetContext({ widgetName, widgetDesc, moduleName }, legacy) {
   return {
-    experimental,
+    legacy,
     widgetDesc,
     moduleName,
     pluginName: createPluginName(widgetName),

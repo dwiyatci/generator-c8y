@@ -14,8 +14,8 @@
       name: '<%= camelCasedWidgetName %>',
       nameDisplay: gettext('<%= capitalizedWidgetName %>'),
       description: gettext('<%- widgetDesc %>'),
-      <%- experimental ? `widgetComponent: '${widgetComponentName}',` : "templateUrl: ':::PLUGIN_PATH:::/main.html'," %>
-      <%- experimental ? `configComponent: '${widgetConfigComponentName}',` : "configTemplateUrl: ':::PLUGIN_PATH:::/config.html'," %>
+      <%- legacy ? "templateUrl: ':::PLUGIN_PATH:::/main.html'," : `widgetComponent: '${widgetComponentName}',` %>
+      <%- legacy ? "configTemplateUrl: ':::PLUGIN_PATH:::/config.html'," : `configComponent: '${widgetConfigComponentName}',` %>
       options: {
         noDeviceTarget: false,
         noNewWidgets: false,

@@ -10,7 +10,7 @@
 As usual, it all started with laziness. Laziness in repeating the same thing over and over again. :stuck_out_tongue_winking_eye: Then with bits of creativity and big interest in automation, comes this hobby project. :speedboat::fishing_pole_and_fish:
 
 ## Installation
-* Make sure you have Node.js ≥ v8.9.0 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
+* Make sure you have Node.js ≥ v8.11.1 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
 
 * Install Yeoman, he's a cool guy. :guardsman::sunglasses: Get to know more about him here: http://yeoman.io.
 
@@ -48,7 +48,7 @@ I and my colleague, Jan Feuerbach, are working on another interesting generator 
 - [X] c8y:plugin widget
 - [X] c8y:plugin chart
 - [X] c8y:plugin translations
-- [X] c8y:plugin widget --experimental (use new widget component API :microscope:)
+- [X] c8y:plugin widget --legacy (use legacy widget component API :older_man:)
 - [X] c8y:plugin widget --typescript (use TypeScript to write widget :lock_with_ink_pen:). Example [here](https://github.com/dwiyatci/cumulocity-unicornify-widget).
 - [X] c8y:plugin widget --typescript-nomods (use TypeScript without usage of import/export syntax)
 

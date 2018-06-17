@@ -25,6 +25,7 @@
     "yeoman-generator": "2.0.5"
   },
   "scripts": {
-    "install:clean": "yarn upgrade || yarn install"
+    "install:clean": "yarn upgrade || yarn install",
+    "update": "yarn upgrade-interactive --latest"
   }
 }

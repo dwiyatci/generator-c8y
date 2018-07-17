@@ -18,12 +18,12 @@
 
     ////////////
 
-    async function getDataFor(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
-      const data = await $q.resolve([]);
-
-      console.log(data);
-
-      return data;
+    function getDataFor(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
+      return $q.resolve([])
+        .then((data) => {
+          console.log(data);
+          return data;
+        });
     }
   }
 })();

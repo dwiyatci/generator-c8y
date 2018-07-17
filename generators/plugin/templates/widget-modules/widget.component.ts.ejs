@@ -10,7 +10,6 @@ export const <%= widgetComponentName %> = {
 /* @ngInject */
 function Controller(
   this: angular.IController,
-  $rootScope: angular.IRootScopeService,
   <%= widgetDataServiceName %>: any
 ) {
   const vm = this;
@@ -27,13 +26,12 @@ function Controller(
     }
   }
 
-  async function onConfigChange(config: any) {
+  function onConfigChange(config: any) {
     const deviceId = _.get(config, 'device.id');
 
     if (deviceId) {
-      vm.data = await <%= widgetDataServiceName %>.getDataFor({ source: deviceId });
+      <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
+        .then((data: any) => { vm.data = data; });
     }
-
-    $rootScope.$apply();
   }
 }

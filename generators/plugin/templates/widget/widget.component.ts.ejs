@@ -15,7 +15,6 @@
   /* @ngInject */
   function Controller(
     this: angular.IController,
-    $rootScope: angular.IRootScopeService,
     <%= widgetDataServiceName %>: any
   ) {
     const vm = this;
@@ -36,10 +35,9 @@
       const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
-        vm.data = await <%= widgetDataServiceName %>.getDataFor({ source: deviceId });
+        <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
+          .then((data: any) => { vm.data = data; });
       }
-
-      $rootScope.$apply();
     }
   }
 })();

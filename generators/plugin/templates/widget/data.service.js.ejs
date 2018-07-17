@@ -18,12 +18,12 @@
 
     ////////////
 
-    async function getDataFor({ source }) {
-      const data = await $q.resolve([]);
-
-      console.log(data);
-
-      return data;
+    function getDataFor({ source }) {
+      return $q.resolve([])
+        .then((data) => {
+          console.log(data);
+          return data;
+        });
     }
   }
 })();

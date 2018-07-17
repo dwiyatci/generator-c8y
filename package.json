@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "lodash": "4.17.10",
-    "yeoman-generator": "2.0.5"
+    "yeoman-generator": "3.0.0"
   },
   "scripts": {
     "install:clean": "yarn upgrade || yarn install",

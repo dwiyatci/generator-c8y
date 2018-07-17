@@ -6,11 +6,16 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   let $q;
   // let c8yStubsHelper;
   let dataService;
+  // let c8yModalSpy;
 
   beforeEach(() => {
     common.globalBeforeWithUI();
     // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
     angular.mock.module('<%= moduleName %>');
+    // angular.mock.module(($provide) => {
+    //   c8yModalSpy = jasmine.createSpy('c8yModal');
+    //   $provide.value('c8yModal', c8yModalSpy);
+    // });
 
     inject((_$injector_) => {
       $injector = _$injector_;

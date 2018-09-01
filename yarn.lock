@@ -1610,9 +1610,9 @@ yeoman-environment@^2.0.5:
     text-table "^0.2.0"
     untildify "^3.0.2"
 
-yeoman-generator@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/yeoman-generator/-/yeoman-generator-3.0.0.tgz#fee1d034231720cbd75d4acfd447dafd2f279117"
+yeoman-generator@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/yeoman-generator/-/yeoman-generator-3.1.1.tgz#60cea712618f65ddefd9569a58bb71d2e38d377c"
   dependencies:
     async "^2.6.0"
     chalk "^2.3.0"

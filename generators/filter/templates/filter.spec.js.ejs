@@ -1,19 +1,10 @@
 describe('<%= moduleName %>: <%= filterName %> filter', () => {
   'use strict';
 
-  let <%= filterName %>;
-
-  beforeEach(() => {
-    common.globalBeforeWithUI();
-    module('<%= moduleName %>');
-
-    inject(($filter) => {
-      <%= filterName %> = $filter('<%= filterName %>');
-    });
-  });
-
   describe('testing filter', () => {
     it('should correctly format the output', () => {
+      const { <%= filterName %> } = setup();
+
       // given
       const input = 'hello, world';
 
@@ -25,4 +16,17 @@ describe('<%= moduleName %>: <%= filterName %> filter', () => {
         .toEqual('hello, world');
     });
   });
+
+  function setup() {
+    const setupVariables = {};
+
+    common.globalBeforeWithUI();
+    angular.mock.module('<%= moduleName %>');
+
+    inject(($filter) => _.assign(setupVariables, {
+      <%= filterName %>: $filter('<%= filterName %>')
+    }));
+
+    return setupVariables;
+  }
 });

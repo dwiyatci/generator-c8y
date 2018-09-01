@@ -1,41 +1,11 @@
 describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
-  let $injector;
-  let $rootScope;
-  let $q;
-  // let c8yStubsHelper;
-  let dataService;
-  // let c8yModalSpy;
-
-  beforeEach(() => {
-    common.globalBeforeWithUI();
-    // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
-    angular.mock.module('<%= moduleName %>');
-    // angular.mock.module(($provide) => {
-    //   c8yModalSpy = jasmine.createSpy('c8yModal');
-    //   $provide.value('c8yModal', c8yModalSpy);
-    // });
-
-    inject((_$injector_) => {
-      $injector = _$injector_;
-      $rootScope = $injector.get('$rootScope');
-      $q = $injector.get('$q');
-      // c8yStubsHelper = $injector.get('c8yStubsHelper');
-      dataService = $injector.get('<%= widgetDataServiceName %>');
-      // window.Promise = $q;
-    });
-  });
-
   describe('getting widget data', () => {
-    // let c8yMeasurements;
-
-    beforeEach(() => {
-      // dependencies to be stubbed
-      // c8yMeasurements = $injector.get('c8yMeasurements');
-    });
-
     it('should return correct data', (done) => {
+      const { $injector, $rootScope, c8yStubsHelper, dataService } = setup();
+      // const c8yMeasurements = $injector.get('c8yMeasurements');
+
       // given
       const filter = {};
 
@@ -58,4 +28,28 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       $rootScope.$apply();
     });
   });
+
+  function setup() {
+    const setupVariables = {};
+
+    common.globalBeforeWithUI();
+    // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
+    angular.mock.module('<%= moduleName %>');
+    // angular.mock.module(($provide) => {
+    //   setupVariables.c8yModalSpy = jasmine.createSpy('c8yModal');
+    //   $provide.value('c8yModal', c8yModalSpy);
+    // });
+
+    inject(($injector) => _.assign(setupVariables, {
+      $injector,
+      $rootScope: $injector.get('$rootScope'),
+      $q: $injector.get('$q'),
+      // c8yStubsHelper: $injector.get('c8yStubsHelper'),
+      dataService: $injector.get('<%= widgetDataServiceName %>')
+    }));
+
+    // window.Promise = setupVariables.$q;
+
+    return setupVariables;
+  }
 });

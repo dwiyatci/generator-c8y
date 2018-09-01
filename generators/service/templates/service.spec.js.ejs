@@ -1,37 +1,11 @@
 describe('<%= moduleName %>: <%= serviceName %> service', () => {
   'use strict';
 
-  let $injector;
-  let $rootScope;
-  let $q;
-  let $http;
-  let $httpBackend;
-  let <%= serviceName %>;
-
-  beforeEach(() => {
-    common.globalBeforeWithUI();
-    module('<%= moduleName %>');
-
-    inject((_$injector_) => {
-      $injector = _$injector_;
-      $rootScope = $injector.get('$rootScope');
-      $q = $injector.get('$q');
-      $http = $injector.get('$http');
-      $httpBackend = $injector.get('$httpBackend');
-      <%= serviceName %> = $injector.get('<%= serviceName %>');
-    });
-  });
-
   describe('testing method', () => {
-    // let exampleStub;
-
-    beforeEach(() => {
-      //////////// stubbing dependencies
-
-      // exampleStub = spyOn($injector.get('exampleDependency'), 'method');
-    });
-
     it('should return "hello, world"', () => {
+      const { $injector, <%= serviceName %> } = setup();
+      // const exampleStub = spyOn($injector.get('exampleDependency'), 'method');
+
       // given
 
       // when
@@ -42,4 +16,22 @@ describe('<%= moduleName %>: <%= serviceName %> service', () => {
         .toEqual('hello, world');
     });
   });
+
+  function setup() {
+    const setupVariables = {};
+
+    common.globalBeforeWithUI();
+    angular.mock.module('<%= moduleName %>');
+
+    inject(($injector) => _.assign(setupVariables, {
+      $injector,
+      $rootScope: $injector.get('$rootScope'),
+      $q: $injector.get('$q'),
+      $http: $injector.get('$http'),
+      $httpBackend: $injector.get('$httpBackend'),
+      <%= serviceName %>: $injector.get('<%= serviceName %>')
+    }));
+
+    return setupVariables;
+  }
 });

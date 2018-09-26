@@ -16,7 +16,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       // when
       // c8yMeasurements.list = c8yStubsHelper.createListMeasurementsFake(measurements);
 
-      dataService.getDataFor(filter)
+      dataService.getData(filter)
         .then((data) => {
           // then
           expect(data)
@@ -47,8 +47,6 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       // c8yStubsHelper: $injector.get('c8yStubsHelper'),
       dataService: $injector.get('<%= widgetDataServiceName %>')
     }));
-
-    // window.Promise = setupVariables.$q;
 
     return setupVariables;
   }

@@ -29,15 +29,15 @@
 
     }
 
-    function $onChanges({ prop }) {
-      if (prop) {
+    function $onChanges(changes) {
+      if (changes.prop) {
         onPropChange(vm.prop);
       }
     }
 
     function onPropChange(prop) {
       if (prop) {
-        console.log(prop);
+        console.dir(prop);
       }
     }
   }

@@ -11,17 +11,17 @@
     <%= widgetConstantsName %>
   ) {
     const service = {
-      getDataFor
+      getData
     };
 
     return service;
 
     ////////////
 
-    function getDataFor({ source }) {
+    function getData({ source }) {
       return $q.resolve([])
         .then((data) => {
-          console.log(data);
+          console.dir(data);
           return data;
         });
     }

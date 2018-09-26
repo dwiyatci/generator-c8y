@@ -3,17 +3,17 @@ export function <%= widgetDataServiceName %>(
   <%= widgetConstantsName %>: any
 ) {
   const service = {
-    getDataFor
+    getData
   };
 
   return service;
 
   ////////////
 
-  function getDataFor(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
+  function getData(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
     return $q.resolve([])
       .then((data) => {
-        console.log(data);
+        console.dir(data);
         return data;
       });
   }

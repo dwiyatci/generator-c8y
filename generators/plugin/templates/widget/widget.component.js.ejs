@@ -24,8 +24,8 @@
 
     ////////////
 
-    function $onChanges({ config }) {
-      if (config) {
+    function $onChanges(changes) {
+      if (changes.config) {
         onConfigChange(vm.config);
       }
     }
@@ -34,7 +34,7 @@
       const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
-        <%= widgetDataServiceName %>.getDataFor({ source: deviceId })
+        <%= widgetDataServiceName %>.getData({ source: deviceId })
           .then((data) => { vm.data = data; });
       }
     }

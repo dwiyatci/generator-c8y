@@ -12,8 +12,7 @@ describe('<%= moduleName %>: <%= filterName %> filter', () => {
       const output = <%= filterName %>(input);
 
       // then
-      expect(output)
-        .toEqual('hello, world');
+      expect(output).toEqual('hello, world');
     });
   });
 
@@ -23,9 +22,11 @@ describe('<%= moduleName %>: <%= filterName %> filter', () => {
     common.globalBeforeWithUI();
     angular.mock.module('<%= moduleName %>');
 
-    inject(($filter) => _.assign(setupVariables, {
-      <%= filterName %>: $filter('<%= filterName %>')
-    }));
+    inject(($filter) =>
+      _.assign(setupVariables, {
+        <%= filterName %>: $filter('<%= filterName %>')
+      })
+    );
 
     return setupVariables;
   }

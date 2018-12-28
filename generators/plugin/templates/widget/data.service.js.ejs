@@ -6,10 +6,7 @@
     .factory('<%= widgetDataServiceName %>', dataService);
 
   /* @ngInject */
-  function dataService(
-    $q,
-    <%= widgetConstantsName %>
-  ) {
+  function dataService($q, <%= widgetConstantsName %>) {
     const service = {
       getData
     };
@@ -19,11 +16,10 @@
     ////////////
 
     function getData({ source }) {
-      return $q.resolve([])
-        .then((data) => {
-          console.dir(data);
-          return data;
-        });
+      return $q.resolve([]).then(data => {
+        console.dir(data);
+        return data;
+      });
     }
   }
 })();

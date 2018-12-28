@@ -6,10 +6,7 @@
     .factory('<%= widgetChartFactoryName %>', chartFactory);
 
   /* @ngInject */
-  function chartFactory(
-    <%= widgetConstantsName %>,
-    gettext
-  ) {
+  function chartFactory(<%= widgetConstantsName %>, gettext) {
     const service = {
       create
     };
@@ -18,9 +15,7 @@
 
     ////////////
 
-    function create(
-      { container } = { container: $('<div>') }
-    ) {
+    function create({ container } = { container: $('<div>') } ) {
       let dataset;
       let margin;
       let w;
@@ -50,9 +45,7 @@
 
       function clear() {
         if (container.jquery) {
-          container
-            .children()
-            .remove();
+          container.children().remove();
         }
       }
 
@@ -84,33 +77,30 @@
       }
 
       function createXScale() {
-        return d3
-          .scale
+        return d3.scale
           .ordinal()
           .domain(_.range(0, 5))
           .rangeBands([0, w], 0.2);
       }
 
       function createYScale() {
-        return d3
-          .scale
+        return d3.scale
           .linear()
           .domain(d3.extent(dataset))
           .rangeRound([h, 0]);
       }
 
       function createColorScale() {
-        return d3
-          .scale
-          .ordinal()
-          // .domain(_.range(10))
-          .range(_.values(<%= widgetConstantsName %>.COLORS));
+        return (
+          d3.scale
+            .ordinal()
+            // .domain(_.range(10))
+            .range(_.values(homeTemperatureConstants.COLORS))
+        );
       }
 
       function createLLayout() {
-        return d3
-          .layout
-          .pie();
+        return d3.layout.pie();
       }
 
       function setupChartSvg() {
@@ -133,8 +123,7 @@
       }
 
       function createXAxis() {
-        return d3
-          .svg
+        return d3.svg
           .axis()
           .scale(xScale)
           .orient('bottom');
@@ -148,25 +137,20 @@
       }
 
       function createYAxis() {
-        return d3
-          .svg
+        return d3.svg
           .axis()
           .scale(yScale)
           .orient('left');
-        // .tickFormat(formatAsPercentage);
+          // .tickFormat(formatAsPercentage);
       }
 
-      function drawShapes() {
-
-      }
+      function drawShapes() {}
 
       /**
        * I am even lazy to go to the kitchen sometimes, so please help yourself.
        * @see https://github.com/susielu/d3-legend
        */
-      function drawLegend() {
-
-      }
+      function drawLegend() {}
     }
   }
 })();

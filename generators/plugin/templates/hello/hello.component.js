@@ -1,16 +1,14 @@
 (() => {
   'use strict';
 
-  angular
-    .module('c8y.pocs.hello')
-    .component('c8yHello', {
-      templateUrl: ':::PLUGIN_PATH:::/hello.html',
-      bindings: {
-        text: '@'
-      },
-      controllerAs: 'vm',
-      controller: Controller
-    });
+  angular.module('c8y.pocs.hello').component('c8yHello', {
+    templateUrl: ':::PLUGIN_PATH:::/hello.html',
+    bindings: {
+      text: '@'
+    },
+    controllerAs: 'vm',
+    controller: Controller
+  });
 
   /* @ngInject */
   function Controller() {

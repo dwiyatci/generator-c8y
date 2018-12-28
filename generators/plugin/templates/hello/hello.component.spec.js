@@ -4,8 +4,7 @@ describe('c8y.pocs.hello: c8yHello component', () => {
   it('component should exist', () => {
     const { $injector } = setup();
 
-    expect($injector.has('c8yHelloDirective'))
-      .toEqual(true);
+    expect($injector.has('c8yHelloDirective')).toEqual(true);
   });
 
   describe('displaying text', () => {
@@ -27,12 +26,13 @@ describe('c8y.pocs.hello: c8yHello component', () => {
       const { $componentController } = setup();
 
       // when
-      const controller = $componentController('c8yHello', undefined, { text: textBinding });
+      const controller = $componentController('c8yHello', undefined, {
+        text: textBinding
+      });
       controller.$onInit();
 
       // then
-      expect(controller.text)
-        .toEqual(expectedText);
+      expect(controller.text).toEqual(expectedText);
     }
 
     it('you should compile the component instead if use case getting too complex', () => {
@@ -43,13 +43,16 @@ describe('c8y.pocs.hello: c8yHello component', () => {
       const template = '<c8y-hello world="world"></c8y-hello>';
 
       // when
-      const element = createComponent({ $rootScope, $compile, template, bindings });
+      const element = createComponent({
+        $rootScope,
+        $compile,
+        template,
+        bindings
+      });
 
       // then
-      expect(element.html())
-        .toContain('hello');
-      expect(element.controller('c8yHello').text)
-        .toEqual('hello, world');
+      expect(element.html()).toContain('hello');
+      expect(element.controller('c8yHello').text).toEqual('hello, world');
     });
   });
 
@@ -59,13 +62,15 @@ describe('c8y.pocs.hello: c8yHello component', () => {
     common.globalBeforeWithUI();
     angular.mock.module('c8y.pocs.hello');
 
-    inject(($injector) => _.assign(setupVariables, {
-      $injector,
-      $rootScope: $injector.get('$rootScope'),
-      $q: $injector.get('$q'),
-      $compile: $injector.get('$compile'),
-      $componentController: $injector.get('$componentController')
-    }));
+    inject($injector =>
+      _.assign(setupVariables, {
+        $injector,
+        $rootScope: $injector.get('$rootScope'),
+        $q: $injector.get('$q'),
+        $compile: $injector.get('$compile'),
+        $componentController: $injector.get('$componentController')
+      })
+    );
 
     return setupVariables;
   }

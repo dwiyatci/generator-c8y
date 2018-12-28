@@ -1,14 +1,10 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .decorator('<%= recipeName %>', serviceDecorator);
+  angular.module('<%= moduleName %>').decorator('<%= recipeName %>', serviceDecorator);
 
   /* @ngInject */
-  function serviceDecorator(
-    $delegate
-  ) {
+  function serviceDecorator($delegate) {
     const { method: originalMethod } = $delegate;
 
     $delegate.method = decoratedMethod;

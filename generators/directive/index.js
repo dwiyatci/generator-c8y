@@ -11,22 +11,20 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    return this.prompt(
-      [
-        {
-          type: 'input',
-          name: 'moduleName',
-          message: 'Your module name',
-          default: 'c8y.example'
-        },
-        {
-          type: 'input',
-          name: 'directiveName',
-          message: 'Your directive name',
-          default: 'c8yExample'
-        }
-      ])
-      .then(answers => (this.answers = answers));
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'moduleName',
+        message: 'Your module name',
+        default: 'c8y.example'
+      },
+      {
+        type: 'input',
+        name: 'directiveName',
+        message: 'Your directive name',
+        default: 'c8yExample'
+      }
+    ]).then(answers => (this.answers = answers));
   }
 
   writing() {

@@ -6,9 +6,7 @@
     .directive('<%= widgetComponentName %>', chartWidget);
 
   /* @ngInject */
-  function chartWidget(
-    <%= widgetChartFactoryName %>
-  ) {
+  function chartWidget(<%= widgetChartFactoryName %>) {
     const ddo = {
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget.html',
@@ -49,9 +47,7 @@
   }
 
   /* @ngInject */
-  function Controller(
-    <%= widgetDataServiceName %>
-  ) {
+  function Controller(<%= widgetDataServiceName %>) {
     const vm = this;
 
     activate();
@@ -60,14 +56,13 @@
 
     ////////////
 
-    function activate() {
-
-    }
+    function activate() {}
 
     function onDeviceChange(device) {
       if (device) {
-        <%= widgetDataServiceName %>.getData({ source: deviceId })
-          .then((dataset) => { vm.dataset = dataset; });
+        <%= widgetDataServiceName %>.getData({ source: deviceId }).then(dataset => {
+          vm.dataset = dataset;
+        });
       }
     }
   }

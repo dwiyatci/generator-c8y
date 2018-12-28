@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .directive('<%= prefixedDirectiveName %>', <%= directiveName %>);
+  angular.module('<%= moduleName %>').directive('<%= prefixedDirectiveName %>', <%= directiveName %>);
 
   function <%= directiveName %>() {
     const ddo = {
@@ -21,15 +19,11 @@
 
     return ddo;
 
-    function linkFunc(scope, el, attrs, controller) {
-
-    }
+    function linkFunc(scope, el, attrs, controller) {}
   }
 
   /* @ngInject */
   function Controller() {
     const vm = this;
-
-
   }
 })();

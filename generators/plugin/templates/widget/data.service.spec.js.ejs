@@ -2,7 +2,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
   describe('getting widget data', () => {
-    it('should return correct data', (done) => {
+    it('should return correct data', done => {
       const { $injector, $rootScope, c8yStubsHelper, dataService } = setup();
       // const c8yMeasurements = $injector.get('c8yMeasurements');
 
@@ -16,14 +16,12 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       // when
       // c8yMeasurements.list = c8yStubsHelper.createListMeasurementsFake(measurements);
 
-      dataService.getData(filter)
-        .then((data) => {
-          // then
-          expect(data)
-            .toEqual(expectedData);
+      dataService.getData(filter).then(data => {
+        // then
+        expect(data).toEqual(expectedData);
 
-          done();
-        });
+        done();
+      });
 
       $rootScope.$apply();
     });
@@ -35,18 +33,20 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
     common.globalBeforeWithUI();
     // angular.mock.module('c8y.pocs.coreServiceStubsHelper');
     angular.mock.module('<%= moduleName %>');
-    // angular.mock.module(($provide) => {
+    // angular.mock.module($provide => {
     //   setupVariables.c8yModalSpy = jasmine.createSpy('c8yModal');
     //   $provide.value('c8yModal', c8yModalSpy);
     // });
 
-    inject(($injector) => _.assign(setupVariables, {
-      $injector,
-      $rootScope: $injector.get('$rootScope'),
-      $q: $injector.get('$q'),
-      // c8yStubsHelper: $injector.get('c8yStubsHelper'),
-      dataService: $injector.get('<%= widgetDataServiceName %>')
-    }));
+    inject($injector =>
+      _.assign(setupVariables, {
+        $injector,
+        $q: $injector.get('$q'),
+        $rootScope: $injector.get('$rootScope'),
+        // c8yStubsHelper: $injector.get('c8yStubsHelper'),
+        dataService: $injector.get('<%= widgetDataServiceName %>')
+      })
+    );
 
     return setupVariables;
   }

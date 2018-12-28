@@ -8,10 +8,7 @@ export const <%= widgetComponentName %> = {
 };
 
 /* @ngInject */
-function Controller(
-  this: angular.IController,
-  <%= widgetDataServiceName %>: any
-) {
+function Controller(this: angular.IController, <%= widgetDataServiceName %>: any) {
   const vm = this;
 
   _.assign(vm, {
@@ -30,8 +27,9 @@ function Controller(
     const deviceId = _.get(config, 'device.id');
 
     if (deviceId) {
-      <%= widgetDataServiceName %>.getData({ source: deviceId })
-        .then((data: any) => { vm.data = data; });
+      <%= widgetDataServiceName %>.getData({ source: deviceId }).then((data: any) => {
+        vm.data = data;
+      });
     }
   }
 }

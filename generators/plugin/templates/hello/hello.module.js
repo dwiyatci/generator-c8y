@@ -1,6 +1,5 @@
 (() => {
   'use strict';
 
-  angular
-    .module('c8y.pocs.hello', []);
+  angular.module('c8y.pocs.hello', []);
 })();

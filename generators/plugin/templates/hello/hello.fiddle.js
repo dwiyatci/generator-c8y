@@ -1,14 +1,10 @@
 (() => {
   'use strict';
 
-  angular
-    .module('c8y.pocs.hello')
-    .run(runBlock);
+  angular.module('c8y.pocs.hello').run(runBlock);
 
   /* @ngInject */
-  function runBlock(
-    c8ySystem
-  ) {
+  function runBlock(c8ySystem) {
     (async () => {
       const version = await c8ySystem.getUIVersion();
 

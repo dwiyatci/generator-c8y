@@ -3,9 +3,7 @@
   "description": "A simple hello world plugin",
   "category": "Boilerplate",
   "imports": [],
-  "ngModules": [
-    "c8y.pocs.hello"
-  ],
+  "ngModules": ["c8y.pocs.hello"],
   "js": [
     "hello.module.js",
     "hello.config.js",

@@ -12,8 +12,7 @@ describe('<%= moduleName %>: <%= serviceName %> service', () => {
       const actual = <%= serviceName %>.method();
 
       // then
-      expect(actual)
-        .toEqual('hello, world');
+      expect(actual).toEqual('hello, world');
     });
   });
 
@@ -23,14 +22,16 @@ describe('<%= moduleName %>: <%= serviceName %> service', () => {
     common.globalBeforeWithUI();
     angular.mock.module('<%= moduleName %>');
 
-    inject(($injector) => _.assign(setupVariables, {
-      $injector,
-      $rootScope: $injector.get('$rootScope'),
-      $q: $injector.get('$q'),
-      $http: $injector.get('$http'),
-      $httpBackend: $injector.get('$httpBackend'),
-      <%= serviceName %>: $injector.get('<%= serviceName %>')
-    }));
+    inject(($injector) =>
+      _.assign(setupVariables, {
+        $injector,
+        $q: $injector.get('$q'),
+        $rootScope: $injector.get('$rootScope'),
+        $http: $injector.get('$http'),
+        $httpBackend: $injector.get('$httpBackend'),
+        <%= serviceName %>: $injector.get('<%= serviceName %>')
+      })
+    );
 
     return setupVariables;
   }

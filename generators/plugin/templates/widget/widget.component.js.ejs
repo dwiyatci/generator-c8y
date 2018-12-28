@@ -1,21 +1,17 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .component('<%= widgetComponentName %>', {
-      templateUrl: ':::PLUGIN_PATH:::/widget.html',
-      bindings: {
-        config: '<'
-      },
-      controllerAs: 'vm',
-      controller: Controller
-    });
+  angular.module('<%= moduleName %>').component('<%= widgetComponentName %>', {
+    templateUrl: ':::PLUGIN_PATH:::/widget.html',
+    bindings: {
+      config: '<'
+    },
+    controllerAs: 'vm',
+    controller: Controller
+  });
 
   /* @ngInject */
-  function Controller(
-    <%= widgetDataServiceName %>
-  ) {
+  function Controller(<%= widgetDataServiceName %>) {
     const vm = this;
 
     _.assign(vm, {
@@ -34,8 +30,9 @@
       const deviceId = _.get(config, 'device.id');
 
       if (deviceId) {
-        <%= widgetDataServiceName %>.getData({ source: deviceId })
-          .then((data) => { vm.data = data; });
+        <%= widgetDataServiceName %>.getData({ source: deviceId }).then(data => {
+          vm.data = data;
+        });
       }
     }
   }

@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .factory('<%= serviceName %>', <%= serviceName %>);
+  angular.module('<%= moduleName %>').factory('<%= serviceName %>', <%= serviceName %>);
 
   /* @ngInject */
   function <%= serviceName %>() {

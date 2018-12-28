@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .filter('<%= filterName %>', <%= filterName %>);
+  angular.module('<%= moduleName %>').filter('<%= filterName %>', <%= filterName %>);
 
   function <%= filterName %>() {
     return filter;

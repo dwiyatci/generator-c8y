@@ -11,10 +11,9 @@ export function <%= widgetDataServiceName %>(
   ////////////
 
   function getData(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
-    return $q.resolve([])
-      .then((data) => {
-        console.dir(data);
-        return data;
-      });
+    return $q.resolve([]).then(data => {
+      console.dir(data);
+      return data;
+    });
   }
 }

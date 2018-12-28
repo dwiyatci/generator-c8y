@@ -3,6 +3,7 @@
  */
 
 const { readdirSync } = require('fs');
+const path = require('path');
 const _ = require('lodash');
 const Generator = require('yeoman-generator');
 
@@ -13,7 +14,10 @@ module.exports = class extends Generator {
     this.argument('type', { type: String, required: false });
     this.option('legacy', { description: 'Use legacy widget API', alias: 'l' });
     this.option('typescript', { description: 'Use TypeScript', alias: 'ts' });
-    this.option('typescript-nomods', { description: 'Use TypeScript (no import/export syntax)', alias: 'tsnm' });
+    this.option('typescript-nomodules', {
+      description: 'Use TypeScript (no import/export syntax)',
+      alias: 'tsnm'
+    });
   }
 
   prompting() {
@@ -29,50 +33,47 @@ module.exports = class extends Generator {
   _getPromptingActions() {
     return {
       manifest() {
-        return this.prompt(
-          [
-            {
-              type: 'input',
-              name: 'pluginName',
-              message: 'Your plugin name',
-              default: 'Hello world'
-            },
-            {
-              type: 'input',
-              name: 'pluginDesc',
-              message: 'Your plugin description',
-              default: 'A simple hello world plugin'
-            },
-            {
-              type: 'input',
-              name: 'pluginCategory',
-              message: 'Your plugin category',
-              default: 'PoC'
-            }
-          ])
-          .then(answers => (this.answers = answers));
+        return this.prompt([
+          {
+            type: 'input',
+            name: 'pluginName',
+            message: 'Your plugin name',
+            default: 'Hello world'
+          },
+          {
+            type: 'input',
+            name: 'pluginDesc',
+            message: 'Your plugin description',
+            default: 'A simple hello world plugin'
+          },
+          {
+            type: 'input',
+            name: 'pluginCategory',
+            message: 'Your plugin category',
+            default: 'PoC'
+          }
+        ]).then(answers => (this.answers = answers));
       },
 
-      hello() {
-      },
+      hello() {},
 
       widget() {
-        return this.prompt(
-          [
-            {
-              type: 'input',
-              name: 'widgetName',
-              message: 'Your widget name',
-              default: 'hello world'
-            },
-            {
-              type: 'input',
-              name: 'widgetDesc',
-              message: 'Your widget description',
-              default: 'Displays „hello, world“ to the user'
-            }
-          ])
-          .then(answers => this.prompt({
+        return this.prompt([
+          {
+            type: 'input',
+            name: 'widgetName',
+            message: 'Your widget name',
+            default: 'hello world'
+          },
+          {
+            type: 'input',
+            name: 'widgetDesc',
+            message: 'Your widget description',
+            default: 'Displays „hello, world“ to the user'
+          }
+        ])
+          .then(answers =>
+            this.prompt({
               type: 'input',
               name: 'moduleName',
               message: 'Your module name',
@@ -83,22 +84,23 @@ module.exports = class extends Generator {
       },
 
       chart() {
-        return this.prompt(
-          [
-            {
-              type: 'input',
-              name: 'widgetName',
-              message: 'Your widget name',
-              default: 'home temperature'
-            },
-            {
-              type: 'input',
-              name: 'widgetDesc',
-              message: 'Your chart description',
-              default: 'Vertical bar chart that displays temperature measurement of a room'
-            }
-          ])
-          .then(answers => this.prompt({
+        return this.prompt([
+          {
+            type: 'input',
+            name: 'widgetName',
+            message: 'Your widget name',
+            default: 'home temperature'
+          },
+          {
+            type: 'input',
+            name: 'widgetDesc',
+            message: 'Your chart description',
+            default:
+              'Vertical bar chart that displays temperature measurement of a room'
+          }
+        ])
+          .then(answers =>
+            this.prompt({
               type: 'input',
               name: 'moduleName',
               message: 'Your module name',
@@ -108,8 +110,7 @@ module.exports = class extends Generator {
           .then(answers => (this.answers = answers));
       },
 
-      translations() {
-      }
+      translations() {}
     };
   }
 
@@ -134,22 +135,48 @@ module.exports = class extends Generator {
       },
 
       hello() {
-        this.fs.copy(
-          this.templatePath('hello'), this.destinationPath('hello'));
+        this.fs.copy(this.templatePath('hello'), this.destinationPath('hello'));
       },
 
       widget({ legacy, typescript, ...opts }) {
-        const typescriptNoModules = opts['typescript-nomods'];
-        const tsEnabled = (typescript || typescriptNoModules);
+        const typescriptNoModules = opts['typescript-nomodules'];
+        const tsEnabled = typescript || typescriptNoModules;
         const parentDir = typescript ? 'widget-modules' : 'widget';
 
         writeWidgetFiles.call(this, {
           answers: this.answers,
           templateFilenames: _(readdirSync(this.templatePath(parentDir)))
-            .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i))
-            .reject(legacy ? _.noop : (filename => filename.match(/^(main|config)\.html\.ejs$/i)))
+            .reject(filename =>
+              filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i)
+            )
+            .reject(
+              legacy
+                ? _.noop
+                : filename => filename.match(/^(main|config)\.html\.ejs$/i)
+            )
+            .map(filename => path.join(parentDir, filename))
+            .concat(
+              !tsEnabled || typescriptNoModules
+                ? []
+                : _(readdirSync(this.templatePath('widget')))
+                    .filter(filename => {
+                      console.log(filename);
+
+                      return _.some(
+                        [
+                          'global.d.ts',
+                          'widget.d.ts',
+                          'widget.html.ejs',
+                          'widget-config.html.ejs',
+                          'styles.less.ejs'
+                        ],
+                        _.matches(filename)
+                      );
+                    })
+                    .map(filename => path.join('widget', filename))
+                    .value()
+            )
             .value(),
-          parentDir,
           legacy
         });
       },
@@ -160,23 +187,31 @@ module.exports = class extends Generator {
         writeWidgetFiles.call(this, {
           answers,
           templateFilenames: _(readdirSync(this.templatePath('widget')))
-            .reject(filename => _.includes(filename, 'component') || _.includes(filename, '.ts'))
-            .reject(legacy ? _.noop : (filename => filename.match(/^(main|config)\.html\.ejs$/i)))
+            .reject(
+              filename =>
+                _.includes(filename, 'component') || _.includes(filename, '.ts')
+            )
+            .reject(
+              legacy
+                ? _.noop
+                : filename => filename.match(/^(main|config)\.html\.ejs$/i)
+            )
+            .map(filename => path.join('widget', filename))
+            .concat(
+              _.map(readdirSync(this.templatePath('chart')), filename =>
+                path.join('chart', filename)
+              )
+            )
             .value(),
-          parentDir: 'widget',
           legacy
-        });
-
-        writeWidgetFiles.call(this, {
-          answers,
-          templateFilenames: readdirSync(this.templatePath('chart')),
-          parentDir: 'chart'
         });
       },
 
       translations() {
         this.fs.copy(
-          this.templatePath('translations'), this.destinationPath('custom-translations'));
+          this.templatePath('translations'),
+          this.destinationPath('custom-translations')
+        );
       }
     };
   }
@@ -184,19 +219,29 @@ module.exports = class extends Generator {
 
 ////////////
 
-function writeWidgetFiles({ answers, templateFilenames, parentDir, legacy }) {
+function writeWidgetFiles({ answers, templateFilenames, legacy }) {
   const context = createWidgetContext(answers, legacy);
 
-  _.forEach(templateFilenames, templateFilename =>
+  _.forEach(templateFilenames, templateFilename => {
+    const { dir, base } = path.parse(templateFilename);
+
     this.fs.copyTpl(
-      this.templatePath(`${parentDir}/${templateFilename}`),
-      this.destinationPath(createDestFileName({
-        widgetName: answers.widgetName,
-        templateFilename
-      })),
+      this.templatePath(templateFilename),
+      this.destinationPath(
+        createDestFileName({
+          widgetName: answers.widgetName,
+          templateFilename: _(dir)
+            .chain()
+            .split(path.sep)
+            .tail()
+            .concat(base)
+            .join(path.sep)
+            .value()
+        })
+      ),
       context
-    )
-  );
+    );
+  });
 }
 
 function createWidgetContext({ widgetName, widgetDesc, moduleName }, legacy) {
@@ -217,12 +262,15 @@ function createWidgetContext({ widgetName, widgetDesc, moduleName }, legacy) {
     widgetConfigHtmlTagName: createWidgetConfigHtmlTagName(widgetName),
     widgetCssClassName: createWidgetCssClassName(widgetName),
     widgetConfigCssClassName: createWidgetConfigCssClassName(widgetName),
-    widgetChartFactoryName: createWidgetChartFactoryName(widgetName),
+    widgetChartFactoryName: createWidgetChartFactoryName(widgetName)
   };
 }
 
 function createDestFileName({ widgetName, templateFilename }) {
-  return `${createPluginDirName(widgetName)}/${templateFilename.replace('.ejs', '')}`;
+  return `${createPluginDirName(widgetName)}/${templateFilename.replace(
+    '.ejs',
+    ''
+  )}`;
 }
 
 function createPluginDirName(widgetName) {
@@ -262,7 +310,9 @@ function createWidgetConfigFormName(widgetName) {
 }
 
 function createWidgetConfigComponentName(widgetName) {
-  return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}WidgetConfig`;
+  return `c8y${_.upperFirst(
+    createCamelCasedWidgetName(widgetName)
+  )}WidgetConfig`;
 }
 
 function createWidgetChartFactoryName(widgetName) {

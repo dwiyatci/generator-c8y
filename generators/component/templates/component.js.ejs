@@ -1,18 +1,16 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .component('<%= prefixedComponentName %>', {
-      template: `
-        <div>{{vm.prop}}</div>
-      `,
-      bindings: {
-        prop: '<'
-      },
-      controllerAs: 'vm',
-      controller: Controller
-    });
+  angular.module('<%= moduleName %>').component('<%= prefixedComponentName %>', {
+    template: `
+      <div>{{vm.prop}}</div>
+    `,
+    bindings: {
+      prop: '<'
+    },
+    controllerAs: 'vm',
+    controller: Controller
+  });
 
   /* @ngInject */
   function Controller() {
@@ -25,9 +23,7 @@
 
     ////////////
 
-    function $onInit() {
-
-    }
+    function $onInit() {}
 
     function $onChanges(changes) {
       if (changes.prop) {

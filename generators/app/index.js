@@ -25,22 +25,20 @@ module.exports = class extends Generator {
   _getPromptingActions() {
     return {
       manifest() {
-        return this.prompt(
-          [
-            {
-              type: 'input',
-              name: 'appContextPath',
-              message: 'Your app context path',
-              default: 'helloworld'
-            },
-            {
-              type: 'input',
-              name: 'appName',
-              message: 'Your app name',
-              default: 'Hello world'
-            }
-          ])
-          .then(answers => (this.answers = answers));
+        return this.prompt([
+          {
+            type: 'input',
+            name: 'appContextPath',
+            message: 'Your app context path',
+            default: 'helloworld'
+          },
+          {
+            type: 'input',
+            name: 'appName',
+            message: 'Your app name',
+            default: 'Hello world'
+          }
+        ]).then(answers => (this.answers = answers));
       }
     };
   }
@@ -68,7 +66,7 @@ module.exports = class extends Generator {
             appContextPath: _.kebabCase(appContextPath)
           }
         );
-      },
+      }
     };
   }
 };

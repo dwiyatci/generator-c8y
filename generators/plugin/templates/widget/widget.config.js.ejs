@@ -1,15 +1,10 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .config(configure);
+  angular.module('<%= moduleName %>').config(configure);
 
   /* @ngInject */
-  function configure(
-    c8yComponentsProvider,
-    gettext
-  ) {
+  function configure(c8yComponentsProvider, gettext) {
     c8yComponentsProvider.add({
       name: '<%= camelCasedWidgetName %>',
       nameDisplay: gettext('<%= capitalizedWidgetName %>'),

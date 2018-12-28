@@ -6,11 +6,7 @@
     .decorator('<%= recipeName %>Directive', directiveDecorator);
 
   /* @ngInject */
-  function directiveDecorator(
-    $delegate,
-    $compile,
-    $parse
-  ) {
+  function directiveDecorator($delegate, $compile, $parse) {
     const [ddo] = $delegate;
     const { link: originalLinkFn } = ddo;
 

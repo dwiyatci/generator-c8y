@@ -11,35 +11,37 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    return this.prompt(
-      [
-        {
-          type: 'input',
-          name: 'moduleName',
-          message: 'Your module name',
-          default: 'c8y.example'
-        },
-        {
-          type: 'input',
-          name: 'serviceName',
-          message: 'Your service name',
-          default: 'example'
-        }
-      ])
-      .then(answers => (this.answers = answers));
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'moduleName',
+        message: 'Your module name',
+        default: 'c8y.example'
+      },
+      {
+        type: 'input',
+        name: 'serviceName',
+        message: 'Your service name',
+        default: 'example'
+      }
+    ]).then(answers => (this.answers = answers));
   }
 
   writing() {
     const { moduleName, serviceName } = this.answers;
 
-    _.forEach(['service.js.ejs', 'service.spec.js.ejs'], tplName => this.fs.copyTpl(
-      this.templatePath(tplName),
-      this.destinationPath(createDestFilename(serviceName, tplName.match(/spec/i))),
-      {
-        moduleName,
-        serviceName
-      }
-    ));
+    _.forEach(['service.js.ejs', 'service.spec.js.ejs'], tplName =>
+      this.fs.copyTpl(
+        this.templatePath(tplName),
+        this.destinationPath(
+          createDestFilename(serviceName, tplName.match(/spec/i))
+        ),
+        {
+          moduleName,
+          serviceName
+        }
+      )
+    );
   }
 };
 

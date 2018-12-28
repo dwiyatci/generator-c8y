@@ -6,10 +6,7 @@
     .factory('<%= widgetDataServiceName %>', dataService);
 
   /* @ngInject */
-  function dataService(
-    $q: angular.IQService,
-    <%= widgetConstantsName %>: any
-  ) {
+  function dataService($q: angular.IQService, <%= widgetConstantsName %>: any) {
     const service = {
       getData
     };
@@ -19,11 +16,10 @@
     ////////////
 
     function getData(filter: c8y.WidgetDataFilter): Promise<%- '<any>' %> {
-      return $q.resolve([])
-        .then((data) => {
-          console.dir(data);
-          return data;
-        });
+      return $q.resolve([]).then(data => {
+        console.dir(data);
+        return data;
+      });
     }
   }
 })();

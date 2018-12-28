@@ -2,7 +2,7 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
   'use strict';
 
   describe('getting widget data', () => {
-    it('should return correct data', (done) => {
+    it('should return correct data', done => {
       const { $injector, $rootScope, c8yStubsHelper, dataService } = setup();
       // const c8yMeasurements = $injector.get('c8yMeasurements');
 
@@ -16,21 +16,18 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
       // when
       // c8yMeasurements.list = c8yStubsHelper.createListMeasurementsFake(measurements);
 
-      dataService.getData(filter)
-        .then((data) => {
-          // then
-          expect(data)
-            .toEqual(expectedData);
+      dataService.getData(filter).then(data => {
+        // then
+        expect(data).toEqual(expectedData);
 
-          done();
-        });
+        done();
+      });
 
       $rootScope.$apply();
     });
   });
 
   function setup() {
-    const win: any = window;
     const setupVariables = {};
 
     common.globalBeforeWithUI();
@@ -41,15 +38,15 @@ describe('<%= moduleName %>: <%= widgetDataServiceName %>', () => {
     //   $provide.value('c8yModal', c8yModalSpy);
     // });
 
-    inject(($injector: angular.auto.IInjectorService) => _.assign(setupVariables, {
-      $injector,
-      $rootScope: $injector.get('$rootScope'),
-      $q: $injector.get('$q'),
-      // c8yStubsHelper: $injector.get('c8yStubsHelper'),
-      dataService: $injector.get('<%= widgetDataServiceName %>')
-    }));
-
-    // win.Promise = setupVariables.$q;
+    inject(($injector: angular.auto.IInjectorService) =>
+      _.assign(setupVariables, {
+        $injector,
+        $q: $injector.get('$q'),
+        $rootScope: $injector.get('$rootScope'),
+        // c8yStubsHelper: $injector.get('c8yStubsHelper'),
+        dataService: $injector.get('<%= widgetDataServiceName %>')
+      })
+    );
 
     return setupVariables;
   }

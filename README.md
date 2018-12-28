@@ -10,7 +10,7 @@
 As usual, it all started with laziness. Laziness in repeating the same thing over and over again. :stuck_out_tongue_winking_eye: Then with bits of creativity and big interest in automation, comes this hobby project. :speedboat::fishing_pole_and_fish:
 
 ## Installation
-* Make sure you have Node.js ≥ v8.11.1 installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
+* Make sure you have Node.js LTS installed and npm from its [website](https://nodejs.org), or better even, use [nvm](https://github.com/creationix/nvm).
 
 * Install Yeoman, he's a cool guy. :guardsman::sunglasses: Get to know more about him here: http://yeoman.io.
 

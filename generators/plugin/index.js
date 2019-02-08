@@ -289,7 +289,7 @@ function createWidgetComponentName(widgetName) {
 }
 
 function createWidgetConfigFormName(widgetName) {
-  return `${createCamelCasedWidgetName(widgetName)}WidgetConfigForm`;
+  return `form${_.upperFirst(createCamelCasedWidgetName(widgetName))}WidgetConfig`;
 }
 
 function createWidgetConfigComponentName(widgetName) {

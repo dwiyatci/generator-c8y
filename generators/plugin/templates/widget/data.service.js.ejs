@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .factory('<%= widgetDataServiceName %>', dataService);
+  angular.module('<%= moduleName %>').factory('<%= widgetDataServiceName %>', dataService);
 
   /* @ngInject */
   function dataService($q, <%= widgetConstantsName %>) {

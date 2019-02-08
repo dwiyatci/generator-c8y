@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .decorator('<%= recipeName %>Directive', directiveDecorator);
+  angular.module('<%= moduleName %>').decorator('<%= recipeName %>Directive', directiveDecorator);
 
   /* @ngInject */
   function directiveDecorator($delegate, $compile, $parse) {

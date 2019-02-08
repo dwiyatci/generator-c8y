@@ -1,16 +1,14 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .component('<%= widgetConfigComponentName %>', {
-      templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
-      bindings: {
-        config: '<'
-      },
-      controllerAs: 'vm',
-      controller: Controller
-    });
+  angular.module('<%= moduleName %>').component('<%= widgetConfigComponentName %>', {
+    templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
+    bindings: {
+      config: '<'
+    },
+    controllerAs: 'vm',
+    controller: Controller
+  });
 
   /* @ngInject */
   function Controller() {

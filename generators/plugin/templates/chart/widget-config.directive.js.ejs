@@ -1,9 +1,7 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .directive('<%= widgetConfigComponentName %>', chartWidgetConfig);
+  angular.module('<%= moduleName %>').directive('<%= widgetConfigComponentName %>', chartWidgetConfig);
 
   /* @ngInject */
   function chartWidgetConfig() {

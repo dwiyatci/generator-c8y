@@ -33,9 +33,7 @@ module.exports = class extends Generator {
     _.forEach(['service.js.ejs', 'service.spec.js.ejs'], tplName =>
       this.fs.copyTpl(
         this.templatePath(tplName),
-        this.destinationPath(
-          createDestFilename(serviceName, tplName.match(/spec/i))
-        ),
+        this.destinationPath(createDestFilename(serviceName, tplName.match(/spec/i))),
         {
           moduleName,
           serviceName

@@ -95,8 +95,7 @@ module.exports = class extends Generator {
             type: 'input',
             name: 'widgetDesc',
             message: 'Your chart description',
-            default:
-              'Vertical bar chart that displays temperature measurement of a room'
+            default: 'Vertical bar chart that displays temperature measurement of a room'
           }
         ])
           .then(answers =>
@@ -146,14 +145,8 @@ module.exports = class extends Generator {
         writeWidgetFiles.call(this, {
           answers: this.answers,
           templateFilenames: _(readdirSync(this.templatePath(parentDir)))
-            .reject(filename =>
-              filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i)
-            )
-            .reject(
-              legacy
-                ? _.noop
-                : filename => filename.match(/^(main|config)\.html\.ejs$/i)
-            )
+            .reject(filename => filename.match(tsEnabled ? /\.js\.ejs$/i : /\.ts(\.ejs)?$/i))
+            .reject(legacy ? _.noop : filename => filename.match(/^(main|config)\.html\.ejs$/i))
             .map(filename => path.join(parentDir, filename))
             .concat(
               !tsEnabled || typescriptNoModules
@@ -187,15 +180,8 @@ module.exports = class extends Generator {
         writeWidgetFiles.call(this, {
           answers,
           templateFilenames: _(readdirSync(this.templatePath('widget')))
-            .reject(
-              filename =>
-                _.includes(filename, 'component') || _.includes(filename, '.ts')
-            )
-            .reject(
-              legacy
-                ? _.noop
-                : filename => filename.match(/^(main|config)\.html\.ejs$/i)
-            )
+            .reject(filename => _.includes(filename, 'component') || _.includes(filename, '.ts'))
+            .reject(legacy ? _.noop : filename => filename.match(/^(main|config)\.html\.ejs$/i))
             .map(filename => path.join('widget', filename))
             .concat(
               _.map(readdirSync(this.templatePath('chart')), filename =>
@@ -267,10 +253,7 @@ function createWidgetContext({ widgetName, widgetDesc, moduleName }, legacy) {
 }
 
 function createDestFileName({ widgetName, templateFilename }) {
-  return `${createPluginDirName(widgetName)}/${templateFilename.replace(
-    '.ejs',
-    ''
-  )}`;
+  return `${createPluginDirName(widgetName)}/${templateFilename.replace('.ejs', '')}`;
 }
 
 function createPluginDirName(widgetName) {
@@ -310,9 +293,7 @@ function createWidgetConfigFormName(widgetName) {
 }
 
 function createWidgetConfigComponentName(widgetName) {
-  return `c8y${_.upperFirst(
-    createCamelCasedWidgetName(widgetName)
-  )}WidgetConfig`;
+  return `c8y${_.upperFirst(createCamelCasedWidgetName(widgetName))}WidgetConfig`;
 }
 
 function createWidgetChartFactoryName(widgetName) {

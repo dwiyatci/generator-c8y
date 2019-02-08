@@ -4,12 +4,7 @@
   "category": "Boilerplate",
   "imports": [],
   "ngModules": ["c8y.pocs.hello"],
-  "js": [
-    "hello.module.js",
-    "hello.config.js",
-    "hello.component.js",
-    "hello.fiddle.js"
-  ],
+  "js": ["hello.module.js", "hello.config.js", "hello.component.js", "hello.fiddle.js"],
   "css": [],
   "copy": []
 }

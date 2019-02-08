@@ -1,12 +1,10 @@
 (() => {
   'use strict';
 
-  angular
-    .module('<%= moduleName %>')
-    .constant('<%= widgetConstantsName %>', {
-      COLORS: {
-        a: '#1f77b4',
-        b: '#17becf'
-      }
-    });
+  angular.module('<%= moduleName %>').constant('<%= widgetConstantsName %>', {
+    COLORS: {
+      a: '#1f77b4',
+      b: '#17becf'
+    }
+  });
 })();

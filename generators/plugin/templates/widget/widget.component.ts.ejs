@@ -10,8 +10,9 @@
     controller: Controller
   });
 
-  /* @ngInject */
   function Controller(this: angular.IController, <%= widgetDataServiceName %>: any) {
+    'ngInject';
+
     const vm = this;
 
     _.assign(vm, {

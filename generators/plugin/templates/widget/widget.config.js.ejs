@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').config(configure);
 
-  /* @ngInject */
   function configure(c8yComponentsProvider, gettext) {
+    'ngInject';
+
     c8yComponentsProvider.add({
       name: '<%= camelCasedWidgetName %>',
       nameDisplay: gettext('<%= capitalizedWidgetName %>'),

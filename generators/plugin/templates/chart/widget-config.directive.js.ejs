@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').directive('<%= widgetConfigComponentName %>', chartWidgetConfig);
 
-  /* @ngInject */
   function chartWidgetConfig() {
+    'ngInject';
+
     const ddo = {
       restrict: 'E',
       templateUrl: ':::PLUGIN_PATH:::/widget-config.html',
@@ -19,8 +20,9 @@
     return ddo;
   }
 
-  /* @ngInject */
   function Controller($scope) {
+    'ngInject';
+
     const vm = this;
 
     activate();

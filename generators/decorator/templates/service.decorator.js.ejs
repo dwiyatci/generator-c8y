@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').decorator('<%= recipeName %>', serviceDecorator);
 
-  /* @ngInject */
   function serviceDecorator($delegate) {
+    'ngInject';
+
     const { method: originalMethod } = $delegate;
 
     $delegate.method = decoratedMethod;

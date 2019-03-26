@@ -3,8 +3,9 @@
 
   angular.module('c8y.pocs.hello').run(runBlock);
 
-  /* @ngInject */
   function runBlock(c8ySystem) {
+    'ngInject';
+
     (async () => {
       const version = await c8ySystem.getUIVersion();
 

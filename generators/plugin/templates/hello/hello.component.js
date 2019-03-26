@@ -10,8 +10,9 @@
     controller: Controller
   });
 
-  /* @ngInject */
   function Controller() {
+    'ngInject';
+
     const vm = this;
 
     _.assign(vm, {

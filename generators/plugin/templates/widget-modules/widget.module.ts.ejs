@@ -11,11 +11,12 @@ export default angular
   .component('<%= widgetConfigComponentName %>', <%= widgetConfigComponentName %>)
   .config(configure);
 
-/* @ngInject */
 function configure(
   c8yComponentsProvider: any,
   gettext: angular.gettext.gettextFunction
 ) {
+  'ngInject';
+
   c8yComponentsProvider.add({
     name: '<%= camelCasedWidgetName %>',
     nameDisplay: gettext('<%= capitalizedWidgetName %>'),

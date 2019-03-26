@@ -10,8 +10,9 @@
     controller: Controller
   });
 
-  /* @ngInject */
   function Controller(this: angular.IController) {
+    'ngInject';
+
     const vm = this;
     const defaultConfig = {};
 

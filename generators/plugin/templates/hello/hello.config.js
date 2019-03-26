@@ -3,8 +3,9 @@
 
   angular.module('c8y.pocs.hello').config(configure);
 
-  /* @ngInject */
   function configure(c8yNavigatorProvider, c8yViewsProvider) {
+    'ngInject';
+
     c8yNavigatorProvider.addNavigation({
       name: 'hello',
       icon: 'cube',

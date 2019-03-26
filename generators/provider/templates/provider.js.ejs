@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').provider('<%= providerName %>', <%= providerName %>Provider);
 
-  /* @ngInject */
   function <%= providerName %>Provider() {
+    'ngInject';
+
     const provider = this;
     let configurableProperty;
 

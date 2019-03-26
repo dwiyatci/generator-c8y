@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').factory('<%= serviceName %>', <%= serviceName %>);
 
-  /* @ngInject */
   function <%= serviceName %>() {
+    'ngInject';
+
     const service = {
       method
     };

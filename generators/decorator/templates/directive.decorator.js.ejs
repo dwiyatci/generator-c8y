@@ -3,8 +3,9 @@
 
   angular.module('<%= moduleName %>').decorator('<%= recipeName %>Directive', directiveDecorator);
 
-  /* @ngInject */
   function directiveDecorator($delegate, $compile, $parse) {
+    'ngInject';
+
     const [ddo] = $delegate;
     const { link: originalLinkFn } = ddo;
 

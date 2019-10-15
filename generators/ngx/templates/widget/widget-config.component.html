@@ -1,0 +1,8 @@
+<ng-form #configForm="ngForm" class="form-group widget-config-hello">
+  <c8y-form-group>
+    <label for="text" translate>
+      Type your text:
+    </label>
+    <input id="text" name="text" required [(ngModel)]="config.text" />
+  </c8y-form-group>
+</ng-form>

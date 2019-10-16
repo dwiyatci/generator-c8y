@@ -6,7 +6,7 @@ import { catchError, switchMapTo } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class HelloWidgetService {
+export class <%= pascalCasedWidgetName %>WidgetService {
   constructor(private inventoryService: InventoryService) {}
 
   getData(source = '42'): Observable<any> {

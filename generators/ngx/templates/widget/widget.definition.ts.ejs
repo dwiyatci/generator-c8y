@@ -1,0 +1,22 @@
+import { gettext } from '@c8y/ngx-components';
+
+import { <%= pascalCasedWidgetName %>WidgetConfigComponent } from './<%= kebabCasedWidgetName %>-widget-config.component';
+import { <%= pascalCasedWidgetName %>WidgetComponent } from './<%= kebabCasedWidgetName %>-widget.component';
+
+export const <%= camelCasedWidgetName %>WidgetDefinition = {
+  id: '<%= kebabCasedWidgetName %>',
+  label: gettext('<%= capitalizedWidgetName %>'),
+  description: gettext('<%- widgetDesc %>'),
+  component: <%= pascalCasedWidgetName %>WidgetComponent,
+  configComponent: <%= pascalCasedWidgetName %>WidgetConfigComponent,
+  data: {
+    ng1: {
+      options: {
+        noDeviceTarget: true,
+        noNewWidgets: false,
+        deviceTargetNotRequired: false,
+        groupsSelectable: false
+      }
+    }
+  }
+};

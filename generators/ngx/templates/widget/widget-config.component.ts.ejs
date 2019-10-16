@@ -3,10 +3,10 @@ import { cloneDeep } from 'lodash-es';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
-  selector: 'c8y-hello-widget-config',
-  templateUrl: './hello-widget-config.component.html'
+  selector: 'c8y-<%= kebabCasedWidgetName %>-widget-config',
+  templateUrl: './<%= kebabCasedWidgetName %>-widget-config.component.html'
 })
-export class HelloWidgetConfigComponent implements AfterViewInit {
+export class <%= pascalCasedWidgetName %>WidgetConfigComponent implements AfterViewInit {
   config = {
     text: ''
   };

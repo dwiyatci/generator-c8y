@@ -1,0 +1,13 @@
+import { NgModule } from '@angular/core';
+
+import { SharedModule } from '../shared/shared.module';
+import { <%= pascalCasedWidgetName %>WidgetConfigComponent } from './<%= kebabCasedWidgetName %>-widget-config.component';
+import { <%= pascalCasedWidgetName %>WidgetComponent } from './<%= kebabCasedWidgetName %>-widget.component';
+
+@NgModule({
+  imports: [SharedModule],
+  declarations: [<%= pascalCasedWidgetName %>WidgetConfigComponent, <%= pascalCasedWidgetName %>WidgetComponent],
+  entryComponents: [<%= pascalCasedWidgetName %>WidgetConfigComponent, <%= pascalCasedWidgetName %>WidgetComponent],
+  exports: []
+})
+export class <%= pascalCasedWidgetName %>WidgetModule {}
